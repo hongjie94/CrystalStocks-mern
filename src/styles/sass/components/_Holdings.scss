@@ -1,0 +1,29 @@
+.Holdings {
+  .container {
+    background: $headerColor;
+  }
+  .card {
+    min-height: 2em;
+    border-radius: 0px;
+  }
+  table {
+    th, td {
+      padding: 15px 20px;
+    }
+  }
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5em 0;
+    .svg {
+      max-width: 6em;
+    }
+    span {
+      font-weight: 500;
+      color: $headerColor;
+      font-size: 3em;
+    }
+    
+  }
+}

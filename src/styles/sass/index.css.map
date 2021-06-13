@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "index.scss",
+        "base/__variable.scss",
+        "components/_App.scss",
+        "components/_Navbar.scss",
+        "components/_Home.scss",
+        "components/_Footer.scss"
+    ],
+    "names": [],
+    "file": "index.css"
+}

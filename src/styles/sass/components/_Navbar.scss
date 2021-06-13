@@ -1,0 +1,63 @@
+nav {
+  .flex {
+    display: flex;
+  }
+  .active {
+    color: black !important;
+    font-weight: 500;
+  }
+  .unkownUser, .profilePicture {
+    width: 3.5em;
+    height: 3.5em;
+  }
+  .brand-logo {
+    font-weight: bold;
+    padding-left: 3em !important;
+    span {
+      padding: 0 .25rem;
+    }
+  }
+  .Iconimg {
+    cursor: pointer;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+  .login {
+    padding-bottom: 0px !important;
+  }
+  .not_login {
+    padding: 0 3rem !important;
+  }
+  .nav_logout {
+    padding: 0 3rem !important;
+  }
+  .markets_link {
+    margin-left: 1em !important;
+  }
+  .user-view {
+    .background {
+      background-color: black;
+      padding: 1em;
+      img {
+        min-height: 15rem;
+      }
+    }
+    .white-text {
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+    .cash {
+      font-size: 1.3rem;
+    }
+  }
+}
+#mobile-nav {
+  li > a {
+    color: white !important;
+  }
+  .active {
+    color: black !important;
+    font-weight: 500;
+  }
+}
