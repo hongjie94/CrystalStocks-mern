@@ -15,9 +15,16 @@ body {
   background: #44A08D; 
   background: -webkit-linear-gradient(to top, #093637, #44A08D); 
   background: linear-gradient(to top, #093637, #44A08D);
-  .switchs {
-    min-height: 80vh !important;
-    padding: 2em 0;
-  }
 }
-  
+
+.Register, 
+.Login, 
+.Markets, 
+.Holdings, 
+.Favorites, 
+.Trading, 
+.History {
+  min-height: 100vh !important;
+  padding: 1em 0;
+  margin-top: 5rem;
+}

@@ -4,8 +4,8 @@ export const Holdings = () => {
     return (
       <div className="Holdings">
       <div className="container">
-        <div class="Holdings__header card teal darken-3">
-          <img src={holdingsImg} className="svg responsive-img" alt=""/>
+        <div className="Holdings__header card teal darken-3">
+          <img src={holdingsImg} className="svg responsive-img" alt="holdingsImg"/>
           <span>Holdings </span>
         </div>
           <table className="highlight">
@@ -21,31 +21,36 @@ export const Holdings = () => {
 
             <tbody>
               <tr>
-                <td>tes Symbol</td>
-                <td>tes Name</td>
-                <td>tes Shares</td>
-                <td>Shares Price</td>
+                <td>tes </td>
+                <td>tes </td>
+                <td>tes </td>
+                <td> Price</td>
+                <td>$0.87</td>
+              </tr>
+              <tr>
+              <td>tes </td>
+                <td>tes </td>
+                <td>tes </td>
+                <td>Shares </td>
                 <td>Total $0.87</td>
               </tr>
               <tr>
-              <td>tes Symbol</td>
-                <td>tes Name</td>
-                <td>tes Shares</td>
-                <td>Shares Price</td>
+                <td>tes </td>
+                <td>tes </td>
+                <td>tes </td>
+                <td>Shares </td>
                 <td>Total $0.87</td>
               </tr>
-              <tr>
-                <td>tes Symbol</td>
-                <td>tes Name</td>
-                <td>tes Shares</td>
-                <td>Shares Price</td>
-                <td>Total $0.87</td>
-              </tr>
+            </tbody>
+          </table>
+          <div className="card teal darken-3 center" >
+          <table className="highlight">
+            <tbody>
               <tr>
                 <td> <b>Cash</b> </td>
-                <td> </td>
-                <td> </td>
-                <td> </td>
+                <td className="notShow"> xxxxxxx</td>
+                <td className="notShow"> xxxxxxx</td>
+                <td className="notShow"> xxxxxxx</td>
                 <td>Total $0.87</td>
               </tr>
               <tr>
@@ -57,7 +62,25 @@ export const Holdings = () => {
               </tr>
             </tbody>
           </table>
-          <div class="card teal darken-3 center" />
+            
+              {/* <tr>
+                <td> <b>Cash</b> </td>
+                  <td> </td>
+                  <td> </td>
+                  <td> </td>
+                  <td> </td>
+                  <td>Total $0.87</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>Total $0.87</td>
+                </tr> */}
+          
+          </div>
     
         </div>
 

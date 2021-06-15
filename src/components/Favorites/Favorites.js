@@ -2,10 +2,10 @@ import React from 'react'
 
 export const Favorites = () => {
   return (
-    <div>
+    <div className="Favorites">
       <div className="container">
             <ul className="collection with-header">
-            <li class="collection-header"><h4>Favorites</h4></li>
+            <li className="collection-header"><h4>Favorites</h4></li>
 
             <li className="collection-item avatar">
               <img src="images/yuna.jpg" alt="" className="circle" />
@@ -38,7 +38,7 @@ export const Favorites = () => {
             <p>First Line <br/>
                 Second Line
             </p>
-            <a href="/#" class="secondary-content"><i class="material-icons">grade</i></a>
+            <a href="/#" className="secondary-content"><i className="material-icons">grade</i></a>
             </li>
             </ul>
         </div>

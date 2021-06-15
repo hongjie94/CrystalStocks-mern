@@ -1,4 +1,100 @@
+.Login {
+  .container {
+    padding: 2em;
+    background: $headerColor;
+  }
+}
+
+.localLogin {
+  margin-bottom: 1.5em;
+}
+.googleLogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  svg {
+    width: 2.5em;
+    height: 2.5em;
+    padding: 5px;
+  }
+}
+
+
 .Register {
-  min-height: 80vh;
-  padding: 5em 0;
+  margin-bottom: 3em;
+  .container {
+    padding: 2rem !important  ;
+    min-width: 85%;
+    border-radius: 3px;
+    .Register_rightBox {
+      padding: 0 2em 2em 2em;
+    }
+    .title {
+      margin-top: 1em;
+    }
+    .box_row {
+      margin-top: 20px;
+      margin-bottom: 0;
+    }
+    .Register_leftBox {
+      padding: 2em;
+      form {
+        .modal {
+          .modal-content {
+            h5 {
+              margin-bottom: 2rem;
+              font-weight: 500;
+            }
+          }
+          .modal-footer {
+            padding: 0px 24px;
+            .iconSubmit {
+              margin-right: 1.5rem;
+            }
+          }
+        }
+      }
+    }
+    .unkownUser {
+      width: 4em;
+      height: 4em;
+    }
+    .registerHeader {
+      padding: 0em;
+      font-size: 1.5em;
+      font-weight: 600;
+    }
+    .registerBtn {
+      margin-top: 1em;
+    }
+    .register_quote {
+      margin: 1rem auto;
+      padding: .25rem;
+      font-weight: 500;
+    }
+    .custom-icon {
+      margin: 0;
+      .s3 {
+        display: flex;
+        padding: 0;
+      }
+    }
+    .profile-name {
+      text-align: left;
+      padding: 0;
+      margin: 1em 0 0 0;
+      font-weight: 600;
+    }
+    .profile-email {
+      text-align: left;
+      margin-top: 0em;
+      font-weight: 600;
+    }
+   
+    padding: 1em;
+    background: $headerColor;
+    .card {
+      padding: 1.5em;
+    }
+  }
 }

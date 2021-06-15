@@ -8,20 +8,23 @@ nav {
   }
   .unkownUser, .profilePicture {
     width: 3.5em;
-    height: 3.5em;
+    height: 3.5em !important;
   }
   .brand-logo {
     font-weight: bold;
     padding-left: 3em !important;
     span {
-      padding: 0 .25rem;
+      padding: 0 0.25rem;
     }
   }
-  .Iconimg {
+  .Iconimg, .modalContoller {
     cursor: pointer;
     justify-content: center;
     display: flex;
     align-items: center;
+  }
+  .not_auth {
+    margin-left: 1.5rem !important;
   }
   .login {
     padding-bottom: 0px !important;
@@ -31,9 +34,6 @@ nav {
   }
   .nav_logout {
     padding: 0 3rem !important;
-  }
-  .markets_link {
-    margin-left: 1em !important;
   }
   .user-view {
     .background {

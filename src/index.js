@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import Context from './UserContext';
+import Context from './contexts/UserContext';
 import './styles/sass/index.scss';
 import 'materialize-css/dist/css/materialize.min.css'
 

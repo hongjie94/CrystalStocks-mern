@@ -2,9 +2,9 @@ import React from 'react'
 import HistoryImg from '../../images/history.svg';
 export const History = () => {
     return (
-        <div>
+        <div className="History">
             <div className="container">
-        <div class="Holdings__header card teal darken-3 center">
+        <div className="Holdings__header card teal darken-3 center">
           <img src={HistoryImg} className="svg responsive-img" alt=""/>
           <span className="center">History </span>
         </div>
@@ -39,7 +39,7 @@ export const History = () => {
               </tr>
             </tbody>
           </table>
-          <div class="card teal darken-3 center" />
+          <div className="card teal darken-3 center" />
         </div>
         </div>
     )
