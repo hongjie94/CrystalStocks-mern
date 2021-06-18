@@ -2,7 +2,10 @@ import Axios from 'axios'
 import { useState, useContext } from 'react';
 import { useHistory } from "react-router-dom";
 import { LoginContext } from '../../contexts/UserContext';
+import loginImg from '../../images/login.svg';
+import loginHeader from '../../images/login_header.svg';
 
+import { NavLink} from 'react-router-dom';
 export const Login = () => {
   const history = useHistory();
   const LoginObject = useContext(LoginContext);
@@ -39,41 +42,63 @@ export const Login = () => {
     <div className="Login">
       <div className="container">
         <div className="row">
-          <div className="col s12 m6">
-          <div className="title center card teal lighten-1"> 
-                <span className="registerHeader truncate white-text"> Welcome back</span>
-              </div>
-          <form className="loginForm" onSubmit={localLogin}>
-          {/* Login  Username */}
-          <div className="row">
-            <div className="input-field col s12">
-            <input 
-              id="user_name" 
-              type="text" 
-              className="validate" 
-              onChange={(e) => setLoginUsername(e.target.value)}
-              required 
+          {/* Right Box Content */}  
+          <div className="col s12 m12 l6 Register_rightBox" > 
+
+            {/* Header */}  
+            <div className="title center card teal lighten-1"> 
+              <span className="registerHeader truncate white-text"> Welcome</span>
+            </div>
+
+            {/* Quote */}  
+            <div className="register_quote center">
+              <p>“Perhaps brains or a skill are the most portable and best wealth preserver.” </p>
+              <p>— <b>Barton Biggs</b> </p>
+            </div>
+
+              {/* Image */}  
+            <img 
+              className="svg responsive-img"  
+              src={loginImg} 
+              alt="loginImg"
             />
-            <label htmlFor="user_name">Username</label>
-            </div>
           </div>
-          {/* Login Password */}
-          <div className="row">
-            <div className="input-field col s12">
+
+          <div className="col s12 m6 card Login_leftBox">
+            <div className="title loginHeader center"> 
+              <img className="responsive-img" src={loginHeader} alt=""/>
+              <p className=" black-text"> User Login</p>
+            </div>
+            <form className="loginForm" onSubmit={localLogin}>
+            {/* Login  Username */}
+            <div className="row">
+              <div className="input-field col s12">
               <input 
-              id="password" 
-              type="password" 
-              autoComplete="password"
-              className="validate" 
-              onChange={(e) => setLoginPassword(e.target.value)}
-              required
+                id="user_name" 
+                type="text" 
+                className="validate" 
+                onChange={(e) => setLoginUsername(e.target.value)}
+                required 
               />
-            <label htmlFor="password">Password</label>
+              <label htmlFor="user_name">Username</label>
+              </div>
             </div>
-          </div>
-          <button className="localLogin btn waves-effect waves-light col s12 center" type="submit" name="action">Login</button>
-        
-        </form>
+            {/* Login Password */}
+            <div className="row">
+              <div className="input-field col s12">
+                <input 
+                id="password" 
+                type="password" 
+                autoComplete="password"
+                className="validate" 
+                onChange={(e) => setLoginPassword(e.target.value)}
+                required
+                />
+              <label htmlFor="password">Password</label>
+              </div>
+            </div>
+            <button className="localLogin btn waves-effect waves-light col s12 center" type="submit" name="action">Login</button>
+          </form>
           <div className="googleLogin center">
             <button className="btn waves-effect waves-light col s12 center" onClick={googleLogin}>
               <div className="googleLogo">
@@ -84,6 +109,7 @@ export const Login = () => {
               </div>
             </button>
             </div>
+            <p className="right toRegister">Don't have an account? <NavLink className="teal-text" to="/register">Register </NavLink> here</p>
           </div>
         </div>
       </div>

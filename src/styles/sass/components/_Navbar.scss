@@ -17,6 +17,20 @@ nav {
       padding: 0 0.25rem;
     }
   }
+  .user_detail {
+    position: relative;
+    margin-left: .25rem;
+    width: 8em;
+    p {
+      font-size: .9rem;
+      margin: 0;
+    }
+    .detail_email {
+      position: absolute;
+      top: 16px;
+      width: 9em;
+    }
+  }
   .Iconimg, .modalContoller {
     cursor: pointer;
     justify-content: center;
@@ -33,7 +47,7 @@ nav {
     padding: 0 3rem !important;
   }
   .nav_logout {
-    padding: 0 3rem !important;
+    padding: 0 1rem !important;
   }
   .user-view {
     .background {

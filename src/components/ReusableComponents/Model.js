@@ -1,7 +1,7 @@
 import M from 'materialize-css';
 import {useEffect } from 'react';
 
-const Model = ({ProfileUrl, getProfileUrl}) => {  
+const Model = ({ProfileUrl, getProfileUrl, modelHeader}) => {  
 
   useEffect(() => {
     M.AutoInit();
@@ -9,17 +9,18 @@ const Model = ({ProfileUrl, getProfileUrl}) => {
 
   return (
     <>
+     {/* Modal Structure */}
       <div id="showModal" className="modal">
         <div className="modal-content">
-          <h5>Custom Profile Photo</h5>
+          <h5 className="center black-text">{modelHeader}</h5>
           <div className="input-field">
-          <input 
-            type="url"
-            id="image_url"
-            className="validate"
-            ref={ProfileUrl}
-          />
-           <label htmlFor="image_url">Image URLW</label>
+            <input 
+              type="url"
+              id="image_url"
+              className="validate urlInput"
+              ref={ProfileUrl}
+            />
+            <label className="url_label" htmlFor="image_url">Image URL</label>
            </div>
         </div>
         <div className="modal-footer">

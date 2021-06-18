@@ -1,0 +1,23 @@
+// Model
+
+.modal {
+  color: black !important;
+  padding: 1em !important;
+  .modal-content {
+    .urlInput {
+      border-bottom: 1px solid #9e9e9e !important;
+    }
+   
+    h5 {
+      margin-bottom: 3rem;
+      font-weight: 500;
+    }
+  }
+  .modal-footer {
+    padding: 0px 24px !important;
+    .iconSubmit {
+      margin-right: 1.5rem !important;
+    }
+  }
+}
+

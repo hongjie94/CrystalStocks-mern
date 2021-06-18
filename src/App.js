@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Navbar } from './components//Navbar/Navbar';
-import { Markets } from './components/Markets/Markets';
+import { Browse } from './components/Markets/Browse';
 import { Holdings } from './components/Holdings/Holdings';
 import { Favorites } from './components/Favorites/Favorites';
 import { History } from './components/History/History';
@@ -19,7 +19,7 @@ function App() {
       <div className="App">
         <Navbar UserObject={LoginObject}/>
           <Switch>
-            <Route exact path="/" component={Markets} />
+            <Route exact path="/" component={Browse} />
             <Route path="/holdings" component={Holdings} />
             <Route path="/favorites" component={Favorites} />
             <Route path="/history" component={History} />

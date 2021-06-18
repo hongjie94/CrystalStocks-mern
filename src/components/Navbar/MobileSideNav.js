@@ -1,8 +1,14 @@
 
 import { Link, NavLink} from 'react-router-dom';
 
+const MobileSideNav = ({
+  Auth, 
+  profileBg, 
+  unkownUser, 
+  UserObject, 
+  logout
+}) => {
 
-const MobileSideNav = ({Auth, profileBg, unkownUser, UserObject, logout}) => {
   return (
     <div>
       {/* Mobile side nav */}
@@ -23,29 +29,29 @@ const MobileSideNav = ({Auth, profileBg, unkownUser, UserObject, logout}) => {
             </li>
           </>
         }
-        
+
         {/* Mobile nav user Info */}
         {Auth &&
-          <li>
-            <div className="user-view">
-              <div className="background">
-                <img className="responsive-img" src={profileBg} alt="profile-bg"/>
+          <>
+            <li>
+              <div className="user-view">
+                <div className="background">
+                  <img className="responsive-img" src={profileBg} alt="profile-bg"/>
+                </div>
+                  <img 
+                    className="circle" 
+                    alt="profile-img" 
+                    src={UserObject.profilePicture}
+                  />
+                <span className="white-text name">{UserObject.username}</span>
+                <span className="white-text email login">{UserObject.email}</span>
+                <span className="white-text cash">Cash: ${UserObject.cash}</span>
               </div>
-              <a className="modal-trigger" href="#showModal">
-                <img 
-                  className="circle" 
-                  alt="profile-img" 
-                  src={UserObject.profilePicture}
-                />
-              </a>
-              <span className="white-text name">{UserObject.username}</span>
-              <span className="white-text email login">{UserObject.email}</span>
-              <span className="white-text cash">Cash: ${UserObject.cash}</span>
-            </div>
-          </li>
+            </li> 
+          </>
         }
          {/* Mobile nav links */}
-        <li><NavLink exact={true} to="/">Markets</NavLink></li>
+        <li><NavLink exact={true} to="/">Browse</NavLink></li>
         {!Auth && 
           <>
             <li><NavLink to="/login" className="waves-effect waves-light btn">Login</NavLink></li>

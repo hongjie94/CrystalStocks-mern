@@ -47,18 +47,18 @@ export const Holdings = () => {
           <table className="highlight">
             <tbody>
               <tr>
-                <td> <b>Cash</b> </td>
+                <td className="white-text"> <b>Cash</b> </td>
                 <td className="notShow"> xxxxxxx</td>
                 <td className="notShow"> xxxxxxx</td>
                 <td className="notShow"> xxxxxxx</td>
-                <td>Total $0.87</td>
+                <td className="white-text">$ 10.87</td>
               </tr>
               <tr>
                 <td></td>
                 <td> </td>
                 <td> </td>
                 <td> </td>
-                <td>Total $0.87</td>
+                <td className="white-text">Total $0.87</td>
               </tr>
             </tbody>
           </table>

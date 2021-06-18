@@ -5,6 +5,7 @@ import M from 'materialize-css';
 import profileBg from '../../images/profileBg.svg';
 import unkownUser from '../../images/unkownUser.png';
 import MobileSideNav from './MobileSideNav';
+import Model from '../ReusableComponents/Model';
 
 
 export const Navbar = (LoginObject) => {
@@ -14,13 +15,16 @@ export const Navbar = (LoginObject) => {
   const UserObject = LoginObject.UserObject.UserObject;
   const ProfileUrl = useRef(null);
 
-   // Get Profile Url
+  // Model Header Text
+  const modelHeader ="Update Profile Photo";
+
+  // Get Profile Url
   const getProfileUrl = () => {
     setprofileImg(ProfileUrl.current.value);
     ProfileUrl.current.value='';
   }
 
-  // Logout
+  // Initialize all of the Materialize Components
   useEffect(() => {
     M.AutoInit();
   }, []);
@@ -56,7 +60,7 @@ export const Navbar = (LoginObject) => {
 
       {/* Nav links */}
       <ul className="right hide-on-med-and-down flex"> 
-        <li><NavLink exact={true} to="/">Markets</NavLink></li>
+        <li><NavLink exact={true} to="/">Browse</NavLink></li>
         { Auth &&
           <>
             <li><NavLink to="/favorites">Favorites</NavLink></li>
@@ -65,6 +69,15 @@ export const Navbar = (LoginObject) => {
           </>
         }
         
+        {/* Modal */}
+        { Auth &&
+          <Model 
+            ProfileUrl={ProfileUrl} 
+            getProfileUrl={getProfileUrl} 
+            modelHeader={modelHeader}
+          />
+        }
+
         {/* Profile image */}
         { Auth ?  
           <a className="modal-trigger modalContoller" href="#showModal">
@@ -73,8 +86,13 @@ export const Navbar = (LoginObject) => {
                 className="circle responsive-img unkownUser"
                 alt="profile-img" 
                 src={UserObject.profilePicture}
-              />
+              />   
+              <div className="user_detail">
+                <p className="detail_email truncate">{UserObject.email}</p>
+                <p className="truncate">{UserObject.username}</p>
+              </div>
             </li> 
+            
           </a> :
             <li className="Iconimg not_auth">
               <img 
@@ -100,29 +118,6 @@ export const Navbar = (LoginObject) => {
             </Link>
           </li>
         </>
-        }
-
-        {/* Modal Structure */}
-        { Auth &&
-         <div id="showModal" className="modal">
-          <div className="modal-content">
-            <h5>Custom Profile Photo</h5>
-            <input 
-              type="url"
-              placeholder="Enter Your URL Here..."
-              className="validate"
-              ref={ProfileUrl}
-            />
-          </div>
-          <div className="modal-footer">
-            <button 
-              onClick={getProfileUrl} 
-              className="modal-close iconSubmit waves-effect waves-light btn"
-              >Summit
-            </button>
-            <a href="#!" className="modal-close waves-effect waves-light btn">Close</a>
-          </div>
-        </div>
         }
       </ul>
 

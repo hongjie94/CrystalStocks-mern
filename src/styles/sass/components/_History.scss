@@ -1,0 +1,33 @@
+.History {
+  .container {
+    background: $headerColor;
+  }
+  .card {
+    min-height: 5em;
+    border-radius: 0px;
+  }
+  table {
+    th, td {
+      padding: 15px 20px;
+    }
+  }
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5em 0;
+    .svg {
+      max-width: 6em;
+    }
+    span {
+      font-weight: 500;
+      color: $headerColor;
+      font-size: 3em;
+    }
+    
+  }
+  &__footer {
+    display: grid;
+    place-items: center;
+  }
+}

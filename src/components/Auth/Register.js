@@ -1,12 +1,21 @@
-import { useRef, useState, useEffect } from 'react';
-import registerImg from '../../images/register.svg';
+import { useRef, useState, useEffect, useContext } from 'react';
+import { useHistory } from "react-router-dom";
+import { LoginContext } from '../../contexts/UserContext';
 import Axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
-import unkownUser from '../../images/unkownUser.png';
-import Model from '../Model';
 import M from 'materialize-css';
+import registerImg from '../../images/register.svg';
+import unkownUser from '../../images/unkownUser.png';
+import Model from '../ReusableComponents/Model';
+
 
 export const Register = () => {
+
+  // useHistory
+  const history = useHistory();
+
+  // useContext
+  const LoginObject = useContext(LoginContext);
 
   // useRef
   const form = useRef(null);
@@ -19,31 +28,35 @@ export const Register = () => {
   const [registerConfirmation, setRegisterConfirmation] = useState("");
   const [profileImg, setprofileImg] = useState(unkownUser);
 
+  // Model Header Text
+  const modelHeader = "Custom Profile Photo";
+
   // Initialize all of the Materialize Components
   useEffect(() => {
     M.AutoInit();
   }, []);
 
-  // Registered
-  const notifySuccess = () => {
-    toast.success('Registered successfully.')
-    window.location.href = 'http://localhost:3000/holdings';
+  // Successfully registered 
+  const notifySuccess = (userObject) => {
+    LoginObject.UpdateUserObject(userObject);
+    toast.success('Registered successfully.');
+    history.push('/holdings');
   };
 
   // Passwords don't match
   const notifyError = () => {
     toast.error("Passwords don't match!");
-    form.current[2].className += ' invalid';
-    form.current[3].className += ' invalid';
-    form.current[2].value = '';
-    form.current[3].value = '';
+    form.current[4].className += ' invalid';
+    form.current[5].className += ' invalid';
+    form.current[4].value = '';
+    form.current[5].value = '';
   };
 
   // Username already exist
   const notifyError2 = (err) => {
     toast.error(err);
-    form.current[0].className += ' invalid';
-    form.current[0].value = '';
+    form.current[2].className += ' invalid';
+    form.current[2].value = '';
     setRegisterUsername('');
   };
 
@@ -70,13 +83,14 @@ export const Register = () => {
         withCredentials: true,
         url: "http://localhost:4000/auth/register",
       }).then((res, error) => {
-        res.data === 'ok' ? notifySuccess() :  notifyError2(res.data);
         if(error) {
-          console.log(error)
+          console.log(error);
         }
+        res.data === 'Username already exists.' ? notifyError2(res.data) : notifySuccess(res.data);
       });
     }
   };
+
 
   return (
     <div className="Register">
@@ -133,6 +147,7 @@ export const Register = () => {
             <Model 
               ProfileUrl={ProfileUrl} 
               getProfileUrl={getProfileUrl} 
+              modelHeader={modelHeader}
             />
             
             {/* Input-field Username */}

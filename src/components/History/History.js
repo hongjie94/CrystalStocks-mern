@@ -39,7 +39,15 @@ export const History = () => {
               </tr>
             </tbody>
           </table>
-          <div className="card teal darken-3 center" />
+          <div className="card teal darken-3 History__footer"> 
+           <div className="History_records">
+             <span className="white-text">
+                As of {new Date().toLocaleDateString()} you 
+                have total of 3 transaction records
+             </span>
+            </div>
+           
+          </div>
         </div>
         </div>
     )
