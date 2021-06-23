@@ -1,5 +1,4 @@
 // Model
-
 .modal {
   color: black !important;
   padding: 1em !important;
@@ -18,6 +17,22 @@
     .iconSubmit {
       margin-right: 1.5rem !important;
     }
+  }
+}
+
+// Pagination
+.pageNum {
+  display: inline;
+  &__wrap {
+    display: inline;
+  }
+}
+
+// Loader
+.Loader {
+  padding: 5em;
+  .spinnerColor {
+    border-color: #00695c;
   }
 }
 

@@ -24,10 +24,16 @@ nav {
     p {
       font-size: .9rem;
       margin: 0;
+      text-transform: capitalize !important;
     }
-    .detail_email {
+    .detail_username {
       position: absolute;
-      top: 16px;
+      top: -16px;
+      width: 9em;
+    }
+    .detail_cash {
+      position: absolute;
+      top: 17px;
       width: 9em;
     }
   }

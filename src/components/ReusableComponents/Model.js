@@ -1,12 +1,14 @@
+import {useEffect} from 'react';
 import M from 'materialize-css';
-import {useEffect } from 'react';
 
 const Model = ({ProfileUrl, getProfileUrl, modelHeader}) => {  
 
-  useEffect(() => {
-    M.AutoInit();
-  }, []);
-
+   // Init Modal Materialize JS
+   useEffect (() => {
+    let Modal = document.querySelectorAll('.modal');
+    M.Modal.init(Modal);
+  });
+  
   return (
     <>
      {/* Modal Structure */}

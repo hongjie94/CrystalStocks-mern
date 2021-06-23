@@ -1,3 +1,4 @@
+// Browse
 .Browse {
   .container {
     min-width: 85%;
@@ -27,23 +28,96 @@
   }
 }
 
-.pageNum {
-  display: inline;
+// Markets section
+.Market__table {
+  table {
+    thead {
+      tr {
+        th {
+          padding-left: 1rem;
+        }
+      }
+    }
+    tbody {
+      tr {
+        td {
+          padding-left: 1rem;
+          p {
+            margin: 0 !important;
+            font-weight: 600;
+            letter-spacing: 1px;
+          }
+          
+          .company {
+            font-size: 0.9rem;
+          }
+          .td_icon {
+            cursor: pointer;
+          }
+        }
+        .quoteChangeicons {
+          padding: 0;
+          width: 15px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+.TableHeader {
+  border-top: 1px solid #00695c !important;
+  border-right: 1px solid #00695c !important;
+  border-left: 1px solid #00695c !important;
+}
+.collapsible-header {
+  .leftContent {
+    display: flex;
+  }
+  display: flex;
+  justify-content: space-between;
+  i {
+    margin: 0;
+    margin-right: 2rem !important;
+    margin-left: 1rem !important;
+    font-size: 3.5rem !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+  span {
+    font-weight: 500 !important;
+  }
+}
+.select-wrapper .caret {
+  fill: white !important;
+}
+.select-wrapper input.select-dropdown {
+  border-bottom: 1px solid white !important; 
+  color: white;
+  margin: 0 !important;
+}
+.dropdown-content li>a, .dropdown-content li>span {
+  color: black !important;
+}
+.fixfield {
+  margin: 0 !important;
+}
+.markets_Pagination {
+  padding: 1em;
 }
 
+// News section
 .News {
   .row {
-    padding: 2em 0;
+    padding-bottom: 2em 0;
   }
   &__card {
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 0.5em 1em !important;
     height: 10rem;
     .newsTitleLinks {
-      transition: all 0.15s ease; 
       &:hover {
         text-decoration: underline; 
         color: #00695c  !important;
@@ -51,10 +125,7 @@
         text-decoration-style: solid;
         text-decoration-thickness: 2px;
       }
-     
-      
     }
-    
     p {
       max-height: 46px;
       font-size: 1.1rem;
@@ -74,3 +145,73 @@
     }
   }
 }
+
+// Search section
+.Search {
+  .Browse__header {
+    span {
+      margin-right: 10px;
+    }
+  }
+}
+.Searchcontent {
+  margin: 0 !important;
+ .card {
+  padding: 2em;
+  margin: 0 !important;
+ }
+ .RelatedNews {
+   border-radius: 0 !important;
+ }
+}
+// Search bar
+.Search__bar {
+  border-top: 1px solid #00695c !important;
+  border-right: 1px solid #00695c !important;
+  border-left: 1px solid #00695c !important;
+  background-color:#00695c !important;
+  margin: 2rem 0 0 0 !important;
+  .row {
+    margin: 1rem !important;
+    .input-field {
+      margin: 0 !important;
+      label {
+        color: white !important;
+        font-weight: 500;
+      }
+      input {
+        margin-bottom: 0 !important;
+        color: white !important;
+        border-bottom: 1px solid white !important;
+      }
+    }
+  }
+}
+.searchLoader {
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.nonfound {
+  position: relative;
+  img {
+    max-width: 25rem !important;
+  }
+  p {
+    position: absolute;
+    top: 42%;
+    left: 37%;
+    font-size: 2em;
+    font-weight: 500;
+  }
+}
+.QuotesData {
+  .companyName {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+}
+
+
+

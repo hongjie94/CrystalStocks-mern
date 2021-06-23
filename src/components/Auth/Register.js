@@ -1,13 +1,11 @@
-import { useRef, useState, useEffect, useContext } from 'react';
+import { useRef, useState, useContext } from 'react';
 import { useHistory } from "react-router-dom";
 import { LoginContext } from '../../contexts/UserContext';
 import Axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
-import M from 'materialize-css';
 import registerImg from '../../images/register.svg';
 import unkownUser from '../../images/unkownUser.png';
 import Model from '../ReusableComponents/Model';
-
 
 export const Register = () => {
 
@@ -30,11 +28,6 @@ export const Register = () => {
 
   // Model Header Text
   const modelHeader = "Custom Profile Photo";
-
-  // Initialize all of the Materialize Components
-  useEffect(() => {
-    M.AutoInit();
-  }, []);
 
   // Successfully registered 
   const notifySuccess = (userObject) => {
@@ -111,7 +104,7 @@ export const Register = () => {
               <p>— <b>Benjamin Franklin</b> </p>
             </div>
 
-              {/* Image */}  
+            {/* Image */}  
             <img 
               className="svg responsive-img"  
               src={registerImg} 

@@ -1,7 +1,6 @@
-import {useEffect, useRef, useState} from 'react';
+import {useRef, useState} from 'react';
 import { Link, NavLink} from 'react-router-dom';
 import axios from 'axios';
-import M from 'materialize-css';
 import profileBg from '../../images/profileBg.svg';
 import unkownUser from '../../images/unkownUser.png';
 import MobileSideNav from './MobileSideNav';
@@ -11,6 +10,7 @@ import Model from '../ReusableComponents/Model';
 export const Navbar = (LoginObject) => {
 
   const [profileImg, setprofileImg] = useState(unkownUser);
+  console.log(profileImg);
   const Auth = LoginObject.UserObject.Auth;
   const UserObject = LoginObject.UserObject.UserObject;
   const ProfileUrl = useRef(null);
@@ -23,11 +23,6 @@ export const Navbar = (LoginObject) => {
     setprofileImg(ProfileUrl.current.value);
     ProfileUrl.current.value='';
   }
-
-  // Initialize all of the Materialize Components
-  useEffect(() => {
-    M.AutoInit();
-  }, []);
 
   // Logout
   const  logout = async () => {
@@ -43,7 +38,7 @@ export const Navbar = (LoginObject) => {
   };
 
   return (
-    <nav className='nav-wrapper teal darken-3'>
+    <nav className='nav-wrapper teal darken-3' id='Browse'>
 
       {/* Nav Logo */}
       <Link className="brand-logo" to="/">
@@ -54,7 +49,7 @@ export const Navbar = (LoginObject) => {
       </Link>
 
       {/* Mobile menu */}
-      <Link  to='#' className="sidenav-trigger" data-target="mobile-nav"> 
+      <Link  to='#' className="sidenav-trigger"  data-target="mobile-nav"> 
         <i className="material-icons">menu</i>
       </Link>
 
@@ -89,7 +84,8 @@ export const Navbar = (LoginObject) => {
               />   
               <div className="user_detail">
                 <p className="detail_email truncate">{UserObject.email}</p>
-                <p className="truncate">{UserObject.username}</p>
+                <p className="detail_username truncate">{UserObject.username}</p>
+                <p className="detail_cash">${UserObject.cash}</p>
               </div>
             </li> 
             

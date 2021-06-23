@@ -1,5 +1,6 @@
-
 import { Link, NavLink} from 'react-router-dom';
+import React, { useEffect } from "react";
+import M from 'materialize-css';
 
 const MobileSideNav = ({
   Auth, 
@@ -9,6 +10,12 @@ const MobileSideNav = ({
   logout
 }) => {
 
+  useEffect (() => {
+    // Init Sidenav Materialize JS
+    let sidenav = document.querySelectorAll('.sidenav');
+    M.Sidenav.init(sidenav);
+  });
+  
   return (
     <div>
       {/* Mobile side nav */}

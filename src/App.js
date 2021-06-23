@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Navbar } from './components//Navbar/Navbar';
-import { Browse } from './components/Markets/Browse';
+import { Browse } from './components/Browse/Browse';
 import { Holdings } from './components/Holdings/Holdings';
 import { Favorites } from './components/Favorites/Favorites';
 import { History } from './components/History/History';
@@ -9,9 +9,8 @@ import { Login } from './components/Auth/Login';
 import { Register } from './components/Auth/Register';
 import { Footer } from './components/Footer/Footer';
 import { LoginContext } from './contexts/UserContext';
-
 function App() {
-
+ 
   const LoginObject = useContext(LoginContext);
 
   return (

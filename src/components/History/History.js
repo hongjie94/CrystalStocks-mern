@@ -17,7 +17,6 @@ export const History = () => {
                 <th>Transacted</th>
               </tr>
             </thead>
-
             <tbody>
               <tr>
                 <td>tes Symbol</td>

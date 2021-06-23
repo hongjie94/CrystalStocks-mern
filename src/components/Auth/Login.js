@@ -7,16 +7,19 @@ import loginHeader from '../../images/login_header.svg';
 
 import { NavLink} from 'react-router-dom';
 export const Login = () => {
+  
   const history = useHistory();
   const LoginObject = useContext(LoginContext);
 
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
+  // Google login
   const googleLogin = ()=>{
     window.open("http://localhost:4000/auth/google", "_self");
   };
 
+  // Local login
   const localLogin = (e) => {
     e.preventDefault();
     Axios({
@@ -42,6 +45,7 @@ export const Login = () => {
     <div className="Login">
       <div className="container">
         <div className="row">
+
           {/* Right Box Content */}  
           <div className="col s12 m12 l6 Register_rightBox" > 
 
@@ -56,7 +60,7 @@ export const Login = () => {
               <p>— <b>Barton Biggs</b> </p>
             </div>
 
-              {/* Image */}  
+            {/* Image */}  
             <img 
               className="svg responsive-img"  
               src={loginImg} 
@@ -64,12 +68,14 @@ export const Login = () => {
             />
           </div>
 
+          {/* Login  Header */}
           <div className="col s12 m6 card Login_leftBox">
             <div className="title loginHeader center"> 
               <img className="responsive-img" src={loginHeader} alt=""/>
               <p className=" black-text"> User Login</p>
             </div>
             <form className="loginForm" onSubmit={localLogin}>
+
             {/* Login  Username */}
             <div className="row">
               <div className="input-field col s12">
@@ -83,6 +89,7 @@ export const Login = () => {
               <label htmlFor="user_name">Username</label>
               </div>
             </div>
+
             {/* Login Password */}
             <div className="row">
               <div className="input-field col s12">
@@ -99,6 +106,8 @@ export const Login = () => {
             </div>
             <button className="localLogin btn waves-effect waves-light col s12 center" type="submit" name="action">Login</button>
           </form>
+
+          {/* Google Login */}
           <div className="googleLogin center">
             <button className="btn waves-effect waves-light col s12 center" onClick={googleLogin}>
               <div className="googleLogo">

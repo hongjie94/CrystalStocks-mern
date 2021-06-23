@@ -16,7 +16,6 @@ export default function Context(props) {
     axios.get("http://localhost:4000/auth/getuser", { 
       withCredentials: true }
       ).then((res) => {
-        console.log(res.data);
       if (res.data) {
         setUserObject(res.data);
         setAuth(true);
