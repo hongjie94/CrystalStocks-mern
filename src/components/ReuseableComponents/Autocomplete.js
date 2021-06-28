@@ -3,11 +3,11 @@ import { useEffect } from 'react';
 import { useSearchSymbols } from 'ticker-symbol-search';
 import M from 'materialize-css';
 
-const Autocomplete = ({InputValue,setInputValue,setQuoteUrl, setLoading}) => {
+const Autocomplete = ({InputValue,setInputValue,setCurSymbol, setLoading}) => {
   
   // Init Autocomplete Materialize JS
   useEffect(() => {
-    let Autocomplete = document.querySelectorAll('.autocomplete');
+    let Autocomplete = document.querySelectorAll('.autocomplete',{ passive: false } );
     M.Autocomplete.init(Autocomplete, options);
   });
 
@@ -19,7 +19,7 @@ const Autocomplete = ({InputValue,setInputValue,setQuoteUrl, setLoading}) => {
     if(isSuccess) {
       return { ...obj, [cur.symbol]: null };   
     }
-    return null;
+    return isLoading;
   }, {});
 
   // Autocomplete options
@@ -32,27 +32,26 @@ const Autocomplete = ({InputValue,setInputValue,setQuoteUrl, setLoading}) => {
 
     // Callback function for Autocomplete
     onAutocomplete() {
-      const input = document.getElementById("autocomplete-input");
-      setQuoteUrl(`https://sandbox.iexapis.com/stable/stock/${input.value}/quote?token=${process.env.REACT_APP_IEXAPI_TOKEN}`);
+      const input = document.getElementById("autocomplete-input", { passive: false });
+      setCurSymbol(input.value);
       setTimeout(() => {
         setLoading(true);
-      }, 2000);
+      }, 1500);
     }
   };  
 
   // Search handler
-  const searchInput = async (e) => {
-    const value = e.target.value.toUpperCase();
-    if(value.length < 4 && !isLoading) {
-      setInputValue(e.target.value);
+  const searchInput = (e) => {
+    const value = e.target.value;
+    if( value <= 4) {
+      setInputValue(value); 
     }
     if (e.key === 'Enter') {
       setLoading(true);
       setTimeout(() => {
-        console.log('set_loading');
         setLoading(false);
       }, 1500);
-      setQuoteUrl(`https://sandbox.iexapis.com/stable/stock/${value}/quote?token=${process.env.REACT_APP_IEXAPI_TOKEN}`);
+      setCurSymbol(value);
     }
   };
 
@@ -61,14 +60,14 @@ const Autocomplete = ({InputValue,setInputValue,setQuoteUrl, setLoading}) => {
        <div className="row Search__bar">
         <div className="col s12">
           <div className="row">
-            <div className="input-field col s12 m4">
+            <div className="input-field col s12 m6 l4">
               <i className="material-icons prefix white-text">search</i>
               <input 
                 type="text" 
                 id="autocomplete-input" 
                 className="autocomplete" 
                 autoComplete='off' 
-                onKeyDown={(e) => searchInput(e)}
+                onKeyDown={(e) => {searchInput(e)}}
               />
               <label htmlFor="autocomplete-input">Search Symbol</label>
             </div>

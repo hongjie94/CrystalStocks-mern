@@ -1,73 +1,68 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import MarketsHeaderImg from '../../../images/markets.svg';
-import DataFetcher from '../../ReusableComponents/DataFetcher';
-import Pagination from '../../ReusableComponents/Pagination';
-import Loader from '../../ReusableComponents/Loader';
+import DataFetcher from '../../ReuseableComponents/DataFetcher';
+import Pagination from '../../ReuseableComponents/Pagination';
+import Loader from '../../ReuseableComponents/Loader';
+import { LoginContext } from '../../../contexts/UserContext';
+import UpdateWatchlist from '../../ReuseableComponents/UpdateWatchlist';
 
 const Markets = () => {
- 
-  // API Urls
-  const MostActivesFetcherURL= 'https://yahoo-finance15.p.rapidapi.com/api/yahoo/co/collections/most_actives';
-  const GainersFetcherURL = 'https://yahoo-finance15.p.rapidapi.com/api/yahoo/co/collections/day_gainers';
-  const LosersFetcherURL = 'https://yahoo-finance15.p.rapidapi.com/api/yahoo/co/collections/day_losers';
+
+  // Get current user objects
+  const LoginObject = useContext(LoginContext);
+  const Auth = LoginObject.Auth;
+  
 
   // Fetch Data
-  const [Url, setUrl] = useState(MostActivesFetcherURL);
-  const Data = DataFetcher(Url);
+  const [Category, setCategory] = useState('most_actives');
+  const {FetchData, Loading} = DataFetcher(`https://yahoo-finance15.p.rapidapi.com/api/yahoo/co/collections/${Category}`);
 
   // Page Start/ End
   const [PageStart, setPageStart] = useState(0);
   const [PageEnd, setPageEnd] = useState(5);
 
-  // Update QuoteObjects
-  const [QuoteCategory, setQuoteCategory] = useState("Most Actives");
+  // Update symbol's icon and color base on symbol change
   const [QuoteIcon, setQuoteIcon] = useState("insert_chart");
   let QuoteChange = {icon:'', color:''};
-
-  // QuoteObject
-  let QuoteObject = {
-    category: QuoteCategory,
-    icon: QuoteIcon,
-    quoteNum: 25,
-    quotes: Data.FetchData.quotes
-  };
-
-  const updateQuoteChange =(icon, color) => {
+  const updateQuoteChange = (icon, color) => {
     QuoteChange = {icon: icon, color: color};
   };
 
-  const toggleCategory = (e) => {
+  let QuoteObject = {
+    icon: QuoteIcon,
+    quoteNum: 25,
+    quotes: FetchData.quotes
+  };
+  
 
-    const selectValue = e.target.value;
-   
+  // Add Watchlist and Remove Watchlist
+  const {addWatchlist , removeWatchlist} = UpdateWatchlist(LoginObject);
 
-    switch (selectValue) {
+  // Update category icon
+  const ToogleCategory = (selectedCategory) => {
+
+    switch (selectedCategory) {
       // Most Actives
-      case 'MostActivesFetcherURL':
-      setUrl(MostActivesFetcherURL);
-      setQuoteIcon('insert_chart')
-      setQuoteCategory('Most Actives');
+      case 'most_actives':
+      setQuoteIcon('insert_chart');
         break;
 
       //Gainers
-      case 'GainersFetcherURL':
-        setUrl(GainersFetcherURL);
+      case 'day_gainers':
         setQuoteIcon('trending_up');
-        setQuoteCategory('Gainers');
         break;
 
       //Losers
-      case 'LosersFetcherURL':
-        setUrl(LosersFetcherURL);
+      case 'day_losers':
         setQuoteIcon('trending_down');
-        setQuoteCategory('Losers');
         break;
-        
+
+      // Default   
       default:
-        setUrl(MostActivesFetcherURL);
+        setQuoteIcon('insert_chart');
     }
   };
- 
+
   return (
     <div className="Markets">
       {/* Market Header */}
@@ -79,20 +74,19 @@ const Markets = () => {
         <div className="col s12">
           <ul className="TableHeader">
           <li>
-
             {/* Market Category options */}
-            <div className="collapsible-header teal darken-3">
+            <div className="collapsible-header teal darken-3" id="MarketTable">
               <div className="leftContent">              
                 <i className="material-icons white-text">{QuoteObject.icon}</i>
                 <div className="input-field fixfield">
-                  <select onChange={((e)=>toggleCategory(e))}>
-                    <option value="MostActivesFetcherURL" defaultValue >Most Actives</option>
-                    <option value="GainersFetcherURL">Gainers</option>
-                    <option value="LosersFetcherURL">Losers</option>
+                  <select onChange={((e)=>{ ToogleCategory(e.target.value); setCategory(e.target.value)})}>
+                    <option value="most_actives" defaultValue >Most Actives</option>
+                    <option value="day_gainers">Gainers</option>
+                    <option value="day_losers">Losers</option>
                   </select>
                 </div>
               </div>
-              <span className="new badge  hide-on-small-only" data-badge-caption="Quotes">{QuoteObject.quoteNum}</span>
+              <span className="new badge hide-on-small-only" data-badge-caption="Quotes">{QuoteObject.quoteNum}</span>
             </div>
 
             {/* Market Table */}
@@ -107,9 +101,10 @@ const Markets = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  { QuoteObject.quotes &&
-                    QuoteObject.quotes.slice(PageStart, PageEnd).map((quote, index)=> (
-                    <tr key={index}>
+                  { QuoteObject.quotes && !Loading  &&
+                    QuoteObject.quotes.slice(PageStart, PageEnd).map((quote)=> (
+                    <tr key={quote.symbol}>
+
                       {/* Company name and Symbol */}
                       <td>
                         <p className="teal-text darken-4 symbol">{quote.symbol}</p> 
@@ -118,14 +113,14 @@ const Markets = () => {
       
                       {/* Price */}
                       <td>
-                        <p>${quote.regularMarketPrice}</p>
+                        <p>${parseFloat(quote.regularMarketPrice).toFixed(2)}</p>
                       </td>
 
-                      {/* Arrow icons */}
+                      {/* Update arrow icons and text color */}
                       {(quote.regularMarketChange.toString()).includes('-') ? 
                         updateQuoteChange('arrow_downward', 'pink-text accent-3') : 
                         updateQuoteChange('arrow_upward', 'teal-text') 
-                        }
+                      }
                       <td className="quoteChangeicons">
                         <i className={`${QuoteChange.color} tiny material-icons td_icon`}>{QuoteChange.icon}</i>
                       </td>
@@ -133,7 +128,7 @@ const Markets = () => {
                       {/* QuoteChange */}
                       <td>
                         <p className={QuoteChange.color}>
-                          {parseFloat(quote.regularMarketChange).toFixed(2)}
+                          { parseFloat(quote.regularMarketChange).toFixed(2) }
                         </p>
                         <p className={QuoteChange.color}> 
                           {parseFloat(quote.regularMarketChangePercent).toFixed(2)}%
@@ -142,7 +137,15 @@ const Markets = () => {
 
                       {/* Star icon  */}
                       <td>
-                        <i className="material-icons td_icon">star_border</i>
+                      {Auth && (LoginObject.UserObject.watchlist).includes(quote.symbol) ?
+                        <a href="#!">
+                          <i className="material-icons td_icon accent-4 amber-text" onClick={()=> {removeWatchlist(quote.symbol)}}>star</i>
+                        </a>
+                        :
+                        <a href="#!">
+                          <i className="material-icons td_icon black-text" onClick={()=> {addWatchlist(quote.symbol)}}>star_border</i>
+                        </a>
+                      }
                       </td>
                     </tr>
                     ))
@@ -150,14 +153,14 @@ const Markets = () => {
                 </tbody>        
               </table>
               {/* Loader */}
-              { !QuoteObject.quotes &&
+              { (!QuoteObject.quotes || Loading) &&
                 <Loader />  
               }
             </div>
               <div className="markets_Pagination white">
               {/* Pagination */}
               <Pagination
-                  parent={'markets'}
+                  parent={'MarketTable'}
                   TotalNumData ={25}
                   setPageStart={setPageStart}
                   setPageEnd = {setPageEnd}

@@ -4,7 +4,7 @@ import axios from 'axios';
 import profileBg from '../../images/profileBg.svg';
 import unkownUser from '../../images/unkownUser.png';
 import MobileSideNav from './MobileSideNav';
-import Model from '../ReusableComponents/Model';
+import Model from '../ReuseableComponents/ProfileUrlModel';
 
 
 export const Navbar = (LoginObject) => {
@@ -30,6 +30,7 @@ export const Navbar = (LoginObject) => {
       withCredentials: true 
     }).then((res) => {
       if(res.data === "done") {
+        window.localStorage.clear();
         window.location.href ="/";
       }
     }).catch((err) => {
@@ -49,7 +50,7 @@ export const Navbar = (LoginObject) => {
       </Link>
 
       {/* Mobile menu */}
-      <Link  to='#' className="sidenav-trigger"  data-target="mobile-nav"> 
+      <Link  to='#' className="sidenav-trigger" data-target="mobile-nav"> 
         <i className="material-icons">menu</i>
       </Link>
 

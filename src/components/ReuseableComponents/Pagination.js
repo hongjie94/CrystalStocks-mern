@@ -70,9 +70,9 @@ const Pagination = ({TotalNumData, setPageStart, setPageEnd, itemsPerPage, paren
   //  Toggle active class
   const ClassNameActive = ((page) => {
     pageNumArr.forEach(page => {
-      document.getElementsByClassName(`${parent}_page${page}`)[0].className = `waves-effect ${parent}_page${page}`;
+      document.getElementsByClassName(`${parent}_page${page}`, { passive: false } )[0].className = `waves-effect ${parent}_page${page}`;
     });
-    document.getElementsByClassName(`${parent}_page${page}`)[0].className +=' active teal darken-3';
+    document.getElementsByClassName(`${parent}_page${page}`,{ passive: false } )[0].className +=' active teal darken-3';
   });
 
 

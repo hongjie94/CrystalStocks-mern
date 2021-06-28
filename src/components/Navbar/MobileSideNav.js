@@ -12,14 +12,15 @@ const MobileSideNav = ({
 
   useEffect (() => {
     // Init Sidenav Materialize JS
-    let sidenav = document.querySelectorAll('.sidenav');
+    let sidenav = document.querySelectorAll('.sidenav', { passive: true });
     M.Sidenav.init(sidenav);
   });
+  
   
   return (
     <div>
       {/* Mobile side nav */}
-      <ul className="sidenav teal darken-3" id="mobile-nav">
+      <ul className="sidenav fixed teal darken-3" id="mobile-nav">
 
         {/* Mobile nav header */}
         {!Auth &&
@@ -58,18 +59,18 @@ const MobileSideNav = ({
           </>
         }
          {/* Mobile nav links */}
-        <li><NavLink exact={true} to="/">Browse</NavLink></li>
+        <li><NavLink className="sidenav-close" exact={true} to="/">Browse</NavLink></li>
         {!Auth && 
           <>
-            <li><NavLink to="/login" className="waves-effect waves-light btn">Login</NavLink></li>
-            <li><NavLink to="/register" className="waves-effect waves-light btn">Register</NavLink></li>
+            <li><NavLink to="/login" className="waves-effect waves-light btn sidenav-close">Login</NavLink></li>
+            <li><NavLink to="/register" className="waves-effect waves-light btn sidenav-close">Register</NavLink></li>
           </>
         }
         {Auth &&
         <>
-          <li><NavLink to="/favorites">Favorites</NavLink></li>
-          <li><NavLink to="/holdings">Holdings</NavLink></li>
-          <li><NavLink to="/history">History</NavLink></li>
+          <li><NavLink className="sidenav-close" to="/favorites">Favorites</NavLink></li>
+          <li><NavLink className="sidenav-close" to="/holdings">Holdings</NavLink></li>
+          <li><NavLink className="sidenav-close" to="/history">History</NavLink></li>
         </>
         }
         { Auth &&

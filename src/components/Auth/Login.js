@@ -47,7 +47,7 @@ export const Login = () => {
         <div className="row">
 
           {/* Right Box Content */}  
-          <div className="col s12 m12 l6 Register_rightBox" > 
+          <div className="col s12 l6 Register_rightBox" > 
 
             {/* Header */}  
             <div className="title center card teal lighten-1"> 
@@ -69,7 +69,7 @@ export const Login = () => {
           </div>
 
           {/* Login  Header */}
-          <div className="col s12 m6 card Login_leftBox">
+          <div className="col s12 l6 card Login_leftBox">
             <div className="title loginHeader center"> 
               <img className="responsive-img" src={loginHeader} alt=""/>
               <p className=" black-text"> User Login</p>

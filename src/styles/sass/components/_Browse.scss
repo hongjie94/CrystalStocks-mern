@@ -8,11 +8,10 @@
     justify-content: center;
     align-items: center;
     margin-top: 2rem !important;
-   
     font-weight: 600;
     padding: 1em;
     img {
-      max-width: 8em !important;
+      width: 8em !important;
     }
     span {
       font-weight: 500;
@@ -40,8 +39,11 @@
     }
     tbody {
       tr {
+        &:hover {
+          background-color: rgba(0,0,0,0.05);
+        }
         td {
-          padding-left: 1rem;
+          padding: 1rem;
           p {
             margin: 0 !important;
             font-weight: 600;
@@ -70,6 +72,7 @@
   border-left: 1px solid #00695c !important;
 }
 .collapsible-header {
+  cursor: default !important;
   .leftContent {
     display: flex;
   }
@@ -172,7 +175,7 @@
   background-color:#00695c !important;
   margin: 2rem 0 0 0 !important;
   .row {
-    margin: 1rem !important;
+    margin: 2rem !important;
     .input-field {
       margin: 0 !important;
       label {
@@ -207,9 +210,62 @@
   }
 }
 .QuotesData {
-  .companyName {
+  p {
+    margin: 0 !important;
+  }
+  .dataMain {
+    position: relative;
+    span{
+      margin-left: 1rem;
+      position: relative;
+      i {
+        position: absolute;
+        top: -9px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }  
+  }
+  .starIcons {
+    position: absolute;
+    top: 0;
+    left: 100%;
+  }
+  .companyName, .QuotesPrice {
+    margin: 0 !important;
     font-size: 2rem;
     font-weight: 500;
+  }
+  .QuotesPrice {
+    font-size: 1.5rem !important;
+  }
+  .dataChange {
+    padding: 0 !important;
+    margin-bottom: 2.5rem !important;
+    .change, .date {
+      font-size: 1.25rem;
+      font-weight: 500;
+    }
+    .watchBtn {
+      margin-top: 1.5rem;
+      .btn {
+        margin-right: 1em;
+      }
+    }
+  }
+  .SymbolDetails {
+    p {
+      font-weight: 500;
+    }
+  }
+  
+  span {
+    position: relative;
+    i {
+      position: absolute;
+      top: -4px;
+    }
   }
 }
 

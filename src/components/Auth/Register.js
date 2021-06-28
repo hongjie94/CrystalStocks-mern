@@ -1,11 +1,11 @@
 import { useRef, useState, useContext } from 'react';
 import { useHistory } from "react-router-dom";
 import { LoginContext } from '../../contexts/UserContext';
-import Axios from 'axios';
+import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import registerImg from '../../images/register.svg';
 import unkownUser from '../../images/unkownUser.png';
-import Model from '../ReusableComponents/Model';
+import Model from '../ReuseableComponents/ProfileUrlModel';
 
 export const Register = () => {
 
@@ -65,7 +65,7 @@ export const Register = () => {
     if (registerPassword !== registerConfirmation) {
       return notifyError();
     } else {
-      await Axios({
+      await axios({
         method: "POST",
         data: {
           profilePicture: profileImg,

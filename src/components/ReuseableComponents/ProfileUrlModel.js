@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import M from 'materialize-css';
 
-const Model = ({ProfileUrl, getProfileUrl, modelHeader}) => {  
+const ProfileUrlModel = ({ProfileUrl, getProfileUrl, modelHeader}) => {  
 
    // Init Modal Materialize JS
    useEffect (() => {
@@ -38,4 +38,4 @@ const Model = ({ProfileUrl, getProfileUrl, modelHeader}) => {
   )
 }
 
-export default Model
+export default ProfileUrlModel

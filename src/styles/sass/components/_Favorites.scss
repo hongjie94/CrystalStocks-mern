@@ -1,0 +1,34 @@
+.Favorites {
+  .container {
+    .collection {
+      .collection-item {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        .content {
+          display: flex;
+          justify-content: space-between;
+          width: 90%;
+          &__left {
+            width: 30%;
+          }
+          &__center,  &__right {
+            display: flex;
+            align-items: flex-end;
+          }
+        }
+        .tradeBtns {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          .btn {
+            min-width: 6em;
+            margin: .5em 0 .5em 1em;
+          }
+        }
+      }
+    }
+  }
+}
+

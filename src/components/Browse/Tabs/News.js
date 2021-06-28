@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import NewsHeaderImg from '../../../images/news.svg';
-import DataFetcher from '../../ReusableComponents/DataFetcher';
-import Pagination from '../../ReusableComponents/Pagination';
-import Loader from '../../ReusableComponents/Loader';
+import DataFetcher from '../../ReuseableComponents/DataFetcher';
+import Pagination from '../../ReuseableComponents/Pagination';
+import Loader from '../../ReuseableComponents/Loader';
 
 const News = () => {
 
@@ -33,7 +33,10 @@ const News = () => {
             <div className="col s12 m6 l4" key={index}>
               <div className="card News__card">
                 <a href={data.link} target="_blank" rel="noreferrer" className="black-text newsTitleLinks">
-                  <p>{data.title.substr(0, 85)}{data.title.length > 85 ? " .....":  ""}</p>
+                  <p>
+                    {data.title.substr(0, 85)}
+                    {data.title.length > 85 ? " .....":  ""}
+                  </p>
                 </a>
                 <div className="News__footer">
                   <p className="">{data.source}</p>

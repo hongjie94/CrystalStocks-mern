@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import News from './Tabs/News';
 import Markets from './Tabs/Markets';
 import Search from './Tabs/Search';
 import M from 'materialize-css';
+
 
 export const Browse = () => {
   
@@ -16,7 +17,7 @@ export const Browse = () => {
     let select = document.querySelectorAll('select');
     M.FormSelect.init(select);
 
-  });
+  }, []);
 
   return (
     <div className="Browse">
@@ -34,7 +35,7 @@ export const Browse = () => {
 
             {/* Markets */}
             <section id="markets" className="col s12">
-              <Markets/>
+              <Markets />
             </section>
 
             {/* News */}
