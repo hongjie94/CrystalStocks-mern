@@ -1,5 +1,5 @@
 import {useRef, useState} from 'react';
-import { Link, NavLink} from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import profileBg from '../../images/profileBg.svg';
 import unkownUser from '../../images/unkownUser.png';
@@ -13,7 +13,7 @@ export const Navbar = (LoginObject) => {
   const Auth = LoginObject.UserObject.Auth;
   const [profileImg, setprofileImg] = useState('');
   const ProfileUrl = useRef(null);
-
+  const history = useHistory();
   // Model Header Text
   const modelHeader ="Update Profile Photo";
 
@@ -57,7 +57,8 @@ export const Navbar = (LoginObject) => {
     }).then((res) => {
       if(res.data === "done") {
         LoginObject.UserObject.setAuth(false);
-        window.location.href ="/";
+        history.push("/");
+        // window.location.href ="/";
       }
     }).catch((err) => {
       console.log(err);

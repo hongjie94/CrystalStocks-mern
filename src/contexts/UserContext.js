@@ -11,7 +11,8 @@ export default function Context({children}) {
   const [StockHistories, setStockHistories] = useState('');
   const [UserHoldings, setUserHoldings] = useState('');
   const [Auth, setAuth] = useState(false);
-  const baseURL = 'https://crystalstocks-backend.herokuapp.com';
+  // const baseURL = 'https://crystalstocks-backend.herokuapp.com';
+  const baseURL = 'http://localhost:4000';
 
 
   // Save symbol datas to Local Storage
