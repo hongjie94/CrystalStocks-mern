@@ -1,11 +1,16 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import Autocomplete from '../../ReuseableComponents/Autocomplete';
 import NoData from '../../../images/noData.svg';
-import SearchHeaderImg from '../../../images/searchBody.svg';
+import searching from '../../../images/searching.svg';
+import searchBg from '../../../images/searchbg.svg';
+import SearchHeaderImg from '../../../images/search_header.svg';
 import Loader from '../../ReuseableComponents/Loader';
 import GetSymbolData from '../../ReuseableComponents/GetSymbolData';
-import { LoginContext } from '../../../contexts/UserContext';
-import UpdateWatchlist from '../../ReuseableComponents/UpdateWatchlist';
+import { StaticDialog } from 'react-st-modal';
+import TradeModel from '../../ReuseableComponents/TradeModel';
+import TradeModelFunctions from '../../ReuseableComponents/TradeModelFunctions';
+import { Toaster } from 'react-hot-toast';
+import ToggleFavorites from '../../ReuseableComponents/ToggleFavorites';
 
 const Search = () => {
 
@@ -14,10 +19,6 @@ const Search = () => {
   const [CurSymbol, setCurSymbol] = useState('');
   const [Loading, setLoading ]= useState(false);
   
-  // Get current user objects
-  const LoginObject = useContext(LoginContext);
-  const Auth = LoginObject.Auth;
-
   // Get symbol Datas
   const {SymbolData} = GetSymbolData(CurSymbol);
 
@@ -27,8 +28,19 @@ const Search = () => {
     searchQuote = {icon: icon, color: color};
   };
 
-  // Add and Remove symbols from Watchlist
-  const {addWatchlist, removeWatchlist} = UpdateWatchlist(LoginObject);
+  const { 
+    isOpen, 
+    setOpen, 
+    Shares, 
+    setShares, 
+    CurrentSymbolDatas, 
+    Trade, 
+    setTrade,
+    disable, 
+    setDisable,
+    trade,
+    TradeStock
+  } = TradeModelFunctions();
   
   return (
 
@@ -52,7 +64,7 @@ const Search = () => {
       <div className="Searchcontent">
         <div className="card">
           <div className="container">
-
+            <Toaster/>
             {/* Symbol Info */}
             <div className="row">
               {
@@ -66,23 +78,9 @@ const Search = () => {
                       </span>
 
                         {/* Toogle Star icons */}
-                        <span>
-                          {Auth && (LoginObject.UserObject.watchlist).includes(SymbolData.symbol) ?
-                          <a href="#!">
-                            <i className="small material-icons accent-4 amber-text" 
-                              onClick={()=> removeWatchlist(SymbolData.symbol)}>
-                              star
-                            </i>
-                          </a>
-                          :
-                          <a href="#!">
-                            <i className="small material-icons black-text" 
-                              onClick={()=> addWatchlist(SymbolData.symbol)}>
-                              star_border
-                            </i>
-                          </a>
-                          }
-                        </span>
+                        <ToggleFavorites 
+                          symbol ={SymbolData.symbol}
+                        />
                         
                         {/*  Toogle Arrow icons and text colors */}  
                         {SymbolData.change &&(SymbolData.change.toString()).includes('-') ? 
@@ -91,12 +89,16 @@ const Search = () => {
                         }
 
                       {/* Latest Price */}  
-                      <p className="QuotesPrice"> ${SymbolData.latestPrice ? SymbolData.latestPrice : 0} </p>
+                      <p className={`QuotesPrice ${searchQuote.color}`}> ${SymbolData.latestPrice ? SymbolData.latestPrice : 0} </p>
                     </div>
                     <div className="col s12 dataChange">
                       <div className="col s12 m6">
+
                         {/* Change Price and Change Percent */}  
                         <span className={`change ${searchQuote.color}`}> 
+                        { (SymbolData.change   > 0) && 
+                            <>+</>
+                          }
                           {SymbolData.change ? (SymbolData.change).toFixed(2): 0} ({SymbolData.changePercent ? (SymbolData.changePercent).toFixed(2) : 0} %)&nbsp; 
                         </span>
 
@@ -109,16 +111,50 @@ const Search = () => {
 
                       {/* Buy and Sell Button */}  
                       <div className="col s12 m6 watchBtn">
-                        <button className="waves-effect waves-light btn">Buy</button>
-                        <button className="waves-effect waves-light btn white-text pink accent-3">Sell</button>
+                        <button className="waves-effect waves-light btn"
+                         onClick={() => { trade(
+                          SymbolData.symbol, 
+                          SymbolData.companyName, 
+                          SymbolData.latestPrice);
+                          setTrade('BUY')
+                          }}>Buy</button>
+                        <button className="waves-effect waves-light btn white-text pink accent-3"
+                         onClick={() => { trade(
+                          SymbolData.symbol, 
+                          SymbolData.companyName, 
+                          SymbolData.latestPrice);
+                          setTrade('SELL')
+                          }}>Sell</button>
                       </div>
+
+                      {/* Trade Model */}    
+                      <StaticDialog
+                        isOpen={isOpen}
+                        title={CurrentSymbolDatas.SymbolCompany}
+                        onAfterClose={(result) => {
+                          setOpen(false);
+                          setShares(1);
+                          setDisable(true);
+                          TradeStock(result);
+                        }}
+                      >
+                        {/* Model content */}
+                        <TradeModel
+                          CurrentSymbolDatas={CurrentSymbolDatas}
+                          Shares={Shares}
+                          setShares={setShares}
+                          Trade={Trade}
+                          disable={disable}
+                          setDisable={setDisable}
+                        />
+                      </StaticDialog>
                     </div>
 
                     {/* Symbol Details */}
                     <div className="col s12 m6 SymbolDetails">
                       <p>Open: {SymbolData.open}</p>
                       <p>Close: {SymbolData.close}</p>
-                      <p>volume: {SymbolData.volume}</p>
+                      <p>Volume: {SymbolData.avgTotalVolume}</p>
                       <p>High: {SymbolData.high}</p>
                       <p>Low: {SymbolData.low}</p>
                     </div>
@@ -135,19 +171,33 @@ const Search = () => {
               {/*  Loader */}  
               { !SymbolData.companyName &&
                 <div className="center nonfound">
-                  <img src={NoData} className="responsive-img" alt="NoData"/>
+                  { !Loading && !SymbolData  &&
+                    // Default
+                    <>
+                      <img src={searchBg} className="responsive-img" alt="NoData"/>
+                      <p className="searchDefault">Search for markets...</p> 
+                    </>
+                    
+                  }
+  
                   { Loading ?
-                    <div className="searchLoader">
-                      <Loader />
-                      <p>Searching...</p> 
-                    </div>
+                    // Searching
+                    <>
+                      <img src={searching} className="responsive-img" alt="NoData"/>
+                      <div className="searchLoader">
+                        <Loader />
+                        <p className="searching">Searching...</p> 
+                      </div>
+                    </>
                   :
                     !Loading &&
+                    // No symbols found
                     <>
-                      {(SymbolData === 'Unknown symbol' || SymbolData === 'Not found') ?
-                        <p className="pink-text accent-3">No symbols found...</p> 
-                        :
-                        <p>Search for markets...</p> 
+                      {(SymbolData === 'Unknown symbol' || SymbolData === 'Not found' ) &&
+                        <> 
+                          <img src={NoData} className="responsive-img" alt="NoData"/>
+                          <p className="Nosymbols pink-text accent-3">No symbols found...</p> 
+                        </>
                       }
                     </>
                   }

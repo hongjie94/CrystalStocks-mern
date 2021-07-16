@@ -1,14 +1,13 @@
-import Axios from 'axios'
+import Axios from 'axios';
 import { useState, useContext } from 'react';
-import { useHistory } from "react-router-dom";
 import { LoginContext } from '../../contexts/UserContext';
 import loginImg from '../../images/login.svg';
 import loginHeader from '../../images/login_header.svg';
-
 import { NavLink} from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
+
 export const Login = () => {
-  
-  const history = useHistory();
+
   const LoginObject = useContext(LoginContext);
 
   const [loginUsername, setLoginUsername] = useState("");
@@ -16,26 +15,29 @@ export const Login = () => {
 
   // Google login
   const googleLogin = ()=>{
-    window.open("http://localhost:4000/auth/google", "_self");
+    toast.loading('Sign in with Google...');
+    window.open("https://crystalstocks-backend.herokuapp.com/auth/google", "_self");
   };
-
+  
   // Local login
   const localLogin = (e) => {
     e.preventDefault();
     Axios({
       method: "POST",
       withCredentials: true,
-      url: "http://localhost:4000/auth/login",
+      url: "https://crystalstocks-backend.herokuapp.com/auth/login",
       data: {
         username: loginUsername.toUpperCase(),
         password: loginPassword,
       }
     }).then((res) => {
       if(res.data === 'No User Exists') {
-        alert(res.data);
+        toast.error("The username you entered does not exist!");
       } else {
+          LoginObject.setAuth(true);
           LoginObject.UpdateUserObject(res.data);
-          history.push('/holdings');
+          window.location.href ="/holdings";
+          toast.success("Hello. You are now successfully logged in. Welcome back!");
         }
       }
     );
@@ -45,17 +47,17 @@ export const Login = () => {
     <div className="Login">
       <div className="container">
         <div className="row">
-
+          <Toaster />
           {/* Right Box Content */}  
-          <div className="col s12 l6 Register_rightBox" > 
+          <div className="col s12 l6 hide-on-med-and-down Login_rightBox" > 
 
             {/* Header */}  
             <div className="title center card teal lighten-1"> 
-              <span className="registerHeader truncate white-text"> Welcome</span>
+              <span className="loginHeader truncate white-text"> Welcome</span>
             </div>
 
             {/* Quote */}  
-            <div className="register_quote center">
+            <div className="login_quote center">
               <p>“Perhaps brains or a skill are the most portable and best wealth preserver.” </p>
               <p>— <b>Barton Biggs</b> </p>
             </div>
@@ -68,11 +70,12 @@ export const Login = () => {
             />
           </div>
 
+          {/* Left Box Content */}  
+          <div className="col s12 l6 card Login_leftBox">    
           {/* Login  Header */}
-          <div className="col s12 l6 card Login_leftBox">
             <div className="title loginHeader center"> 
               <img className="responsive-img" src={loginHeader} alt=""/>
-              <p className=" black-text"> User Login</p>
+              <span className=" teal-text">Login</span>
             </div>
             <form className="loginForm" onSubmit={localLogin}>
 
@@ -118,8 +121,14 @@ export const Login = () => {
               </div>
             </button>
             </div>
-            <p className="right toRegister">Don't have an account? <NavLink className="teal-text" to="/register">Register </NavLink> here</p>
+            <div className="toRegister">
+              <p>Don't have an account? 
+                <NavLink className="reglink teal-text" to="/register"> Register </NavLink> 
+                here
+              </p>
+            </div>
           </div>
+          
         </div>
       </div>
     </div>

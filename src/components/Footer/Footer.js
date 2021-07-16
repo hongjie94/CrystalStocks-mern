@@ -6,7 +6,7 @@ export const Footer = (props) => {
 
     return (
       <div>
-        <footer className="page-footer teal darken-3">
+        <footer className="page-footer teal darken-1">
           <div className="container">
             <div className="row">
               <div className="col l6 s12">
@@ -38,7 +38,7 @@ export const Footer = (props) => {
               </div>
             </div>
           </div>
-          <div className="footer-copyright">
+          <div className="footer-copyright teal darken-2">
             <div className="container">
              Copyright © {new Date().getFullYear()}  All Rights Reserved by Crystal Stocks
             </div>

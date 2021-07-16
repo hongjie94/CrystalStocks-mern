@@ -1,18 +1,27 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import MarketsHeaderImg from '../../../images/markets.svg';
 import DataFetcher from '../../ReuseableComponents/DataFetcher';
 import Pagination from '../../ReuseableComponents/Pagination';
 import Loader from '../../ReuseableComponents/Loader';
 import { LoginContext } from '../../../contexts/UserContext';
 import UpdateWatchlist from '../../ReuseableComponents/UpdateWatchlist';
+import M from 'materialize-css';
 
 const Markets = () => {
+
+
+  // Init Tooltip Materialize JS
+  useEffect(() => {
+    const ac = new AbortController();
+    let Tooltipped = document.querySelectorAll('.tooltipped');
+    M.Tooltip.init(Tooltipped);
+    return () => ac.abort();
+  });
 
   // Get current user objects
   const LoginObject = useContext(LoginContext);
   const Auth = LoginObject.Auth;
   
-
   // Fetch Data
   const [Category, setCategory] = useState('most_actives');
   const {FetchData, Loading} = DataFetcher(`https://yahoo-finance15.p.rapidapi.com/api/yahoo/co/collections/${Category}`);
@@ -23,7 +32,9 @@ const Markets = () => {
 
   // Update symbol's icon and color base on symbol change
   const [QuoteIcon, setQuoteIcon] = useState("insert_chart");
+
   let QuoteChange = {icon:'', color:''};
+
   const updateQuoteChange = (icon, color) => {
     QuoteChange = {icon: icon, color: color};
   };
@@ -33,7 +44,6 @@ const Markets = () => {
     quoteNum: 25,
     quotes: FetchData.quotes
   };
-  
 
   // Add Watchlist and Remove Watchlist
   const {addWatchlist , removeWatchlist} = UpdateWatchlist(LoginObject);
@@ -75,7 +85,7 @@ const Markets = () => {
           <ul className="TableHeader">
           <li>
             {/* Market Category options */}
-            <div className="collapsible-header teal darken-3" id="MarketTable">
+            <div className="collapsible-header teal darken-2" id="MarketTable">
               <div className="leftContent">              
                 <i className="material-icons white-text">{QuoteObject.icon}</i>
                 <div className="input-field fixfield">
@@ -107,8 +117,11 @@ const Markets = () => {
 
                       {/* Company name and Symbol */}
                       <td>
-                        <p className="teal-text darken-4 symbol">{quote.symbol}</p> 
-                        <p className="grey-text darken-4 company">{quote.longName}</p>
+                        <p className="teal-text darken-2 symbol">{quote.symbol}</p> 
+                        <p className="grey-text darken-2 company truncate"
+                           data-position="top" 
+                           data-tooltip={quote.longName && quote.longName}
+                        >{quote.longName}</p>
                       </td>
       
                       {/* Price */}
@@ -128,9 +141,15 @@ const Markets = () => {
                       {/* QuoteChange */}
                       <td>
                         <p className={QuoteChange.color}>
+                        { (quote.regularMarketChange > 0) && 
+                          <>+</>
+                        }
                           { parseFloat(quote.regularMarketChange).toFixed(2) }
                         </p>
                         <p className={QuoteChange.color}> 
+                          { (quote.regularMarketChange > 0) && 
+                            <>+</>
+                          }
                           {parseFloat(quote.regularMarketChangePercent).toFixed(2)}%
                         </p>
                       </td>

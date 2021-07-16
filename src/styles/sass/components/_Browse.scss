@@ -67,9 +67,9 @@
   }
 }
 .TableHeader {
-  border-top: 1px solid #00695c !important;
-  border-right: 1px solid #00695c !important;
-  border-left: 1px solid #00695c !important;
+  border-top: 1px solid #00796b !important;
+  border-right: 1px solid #00796b !important;
+  border-left: 1px solid #00796b !important;
 }
 .collapsible-header {
   cursor: default !important;
@@ -169,10 +169,10 @@
 }
 // Search bar
 .Search__bar {
-  border-top: 1px solid #00695c !important;
-  border-right: 1px solid #00695c !important;
-  border-left: 1px solid #00695c !important;
-  background-color:#00695c !important;
+  border-top: 1px solid #00796b !important;
+  border-right: 1px solid #00796b !important;
+  border-left: 1px solid #00796b !important;
+  background-color:#00796b !important;
   margin: 2rem 0 0 0 !important;
   .row {
     margin: 2rem !important;
@@ -200,14 +200,25 @@
   position: relative;
   img {
     max-width: 25rem !important;
+    width: 100%;
   }
-  p {
+  .Nosymbols, .searching, .searchDefault {
     position: absolute;
-    top: 42%;
-    left: 37%;
     font-size: 2em;
     font-weight: 500;
   }
+  .Nosymbols {
+    top: 42%;
+    left: 37%;
+  }
+  .searching {
+    top: 35%;
+  }
+  .searchDefault {
+    top: 53%;
+    right: 42%;
+  }
+  
 }
 .QuotesData {
   p {
@@ -269,5 +280,35 @@
   }
 }
 
+@media #{$small-and-down} {
+  .Market__table table tbody tr td {
+    padding: .5rem !important;
+    max-width: 4em !important;
+  }
+  .Market__table table thead tr th {
+    padding-left: .5rem !important;
+  }
+  .markets_Pagination {
+    padding: .5em;
+  }
+
+  .Searchcontent .card {
+    padding: 1em;
+  }
+  .nonfound p {
+    top: 30%;
+  }
+  .Browse__header span {
+    font-weight: 500;
+    font-size: 2.5em;
+  }
+}
+
+@media only screen and (max-width: 719px) {
+  .nonfound .searchDefault {
+    top: 10%;
+    right: 18%;
+  }
+}
 
 

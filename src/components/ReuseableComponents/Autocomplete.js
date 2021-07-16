@@ -7,8 +7,10 @@ const Autocomplete = ({InputValue,setInputValue,setCurSymbol, setLoading}) => {
   
   // Init Autocomplete Materialize JS
   useEffect(() => {
-    let Autocomplete = document.querySelectorAll('.autocomplete',{ passive: false } );
+    const ac = new AbortController();
+    let Autocomplete = document.querySelectorAll('.autocomplete');
     M.Autocomplete.init(Autocomplete, options);
+    return () => ac.abort();
   });
 
   // Get Symbols 
@@ -33,10 +35,10 @@ const Autocomplete = ({InputValue,setInputValue,setCurSymbol, setLoading}) => {
     // Callback function for Autocomplete
     onAutocomplete() {
       const input = document.getElementById("autocomplete-input", { passive: false });
-      setCurSymbol(input.value);
       setTimeout(() => {
         setLoading(true);
-      }, 1500);
+      }, 1000);
+      return setCurSymbol(input.value);
     }
   };  
 

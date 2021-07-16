@@ -7,19 +7,21 @@ const GetSymbolData = (propSymbol) => {
 
   useEffect(() => {
     const FetchForSymbolData = async () => {
-      await axios({
-        method: 'get',
-        url: `https://sandbox.iexapis.com/stable/stock/${propSymbol}/quote?token=${process.env.REACT_APP_IEXAPI_TOKEN}`
-      })
-      .then(function (res) {
-        if(res.data) {
-          setSymbolData(res.data);
-        }
-      }).catch(err => {
-        if(err.response) {
-          setSymbolData(err.response.data);
-        } 
-      })
+      if((propSymbol.toString()).length > 0) {
+        await axios({
+          method: 'get',
+          url: `https://sandbox.iexapis.com/stable/stock/${propSymbol}/quote?token=${process.env.REACT_APP_IEXAPI_TOKEN}`
+        })
+        .then(function (res) {
+          if(res.data) {
+            setSymbolData(res.data);
+          }
+        }).catch(err => {
+          if(err.response) {
+            setSymbolData(err.response.data);
+          } 
+        });
+      }
     }
     FetchForSymbolData();
   }, [propSymbol]);

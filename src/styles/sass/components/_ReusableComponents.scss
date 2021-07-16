@@ -1,4 +1,112 @@
-// Model
+// Trade Modal
+.Modal-module_modal__FqeFw {
+  top: 35% !important;
+}
+.Modal-module_dialog__2UBIn {
+  width: 35% !important;
+}
+
+.TradeModelContetnt {
+  .center {
+    h5 {
+      font-weight: 500;
+    }
+    p {
+      font-size: 1.5em;
+    }
+    .price {
+      margin-bottom: 0;
+    }
+  }
+}
+.TradeSubmitBtn {
+  padding: 1em;
+  text-align: center;
+  button {
+    min-width: 10em;
+  }
+}
+
+// HoldingModel
+.rsm-p-8 {
+  padding: 1rem 1rem 2rem 2rem;
+}
+.HoldingModelContent {
+  .shareNum {
+    font-size: 1.5em;
+  }
+  .closeModelBtn {
+    text-align: right;
+    a {
+      &:hover {
+        color: #9e9e9e !important;  
+      }
+    }
+    
+  }
+  .SymbolDetails {
+    margin-top: 1em;
+    .mainRow {
+      h3 {
+        margin: 0;
+        display: initial;
+      }
+      .company {
+        margin-top: 0;
+        font-size: 1.3em;
+        color: gray;
+        display: inherit;
+      }
+    }
+   
+    .infoRow {
+      display: flex;
+      align-items: flex-end;
+      .arrow_price {
+        display: flex;
+        align-items: center;
+      }
+      .price {
+        font-size: 1.5rem;
+        display: inherit;
+      }
+      .change {
+        font-size: 1.3rem;
+        display: inherit;
+      }
+      .ownShares {
+        padding: 5px 12px;
+        border-radius: 5px;
+        position: absolute;
+        top: 16px;
+      }
+      .tradBtns {
+        .buyBtn {
+          margin-right: 1em;
+        }
+      }
+    }
+    .detailsRow {
+      .MarketDetails {
+        span {
+          display: inherit;
+        }
+      }
+    }
+  }
+}
+
+@media #{$small-and-down} {
+  .HoldingModelContent {
+    .SymbolDetails {
+      .infoRow {
+        display:block !important; 
+      }
+    }
+  }
+}
+
+// URL Model
 .modal {
   color: black !important;
   padding: 1em !important;
@@ -35,4 +143,3 @@
     border-color: #00695c;
   }
 }
-

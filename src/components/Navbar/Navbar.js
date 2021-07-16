@@ -5,32 +5,58 @@ import profileBg from '../../images/profileBg.svg';
 import unkownUser from '../../images/unkownUser.png';
 import MobileSideNav from './MobileSideNav';
 import Model from '../ReuseableComponents/ProfileUrlModel';
-
+import toast, { Toaster } from 'react-hot-toast';
 
 export const Navbar = (LoginObject) => {
 
-  const [profileImg, setprofileImg] = useState(unkownUser);
-  console.log(profileImg);
-  const Auth = LoginObject.UserObject.Auth;
   const UserObject = LoginObject.UserObject.UserObject;
+  const Auth = LoginObject.UserObject.Auth;
+  const [profileImg, setprofileImg] = useState('');
   const ProfileUrl = useRef(null);
 
   // Model Header Text
   const modelHeader ="Update Profile Photo";
 
+  const UpdateProfileUrl = async (Url) => {
+    const userID = UserObject.id;
+    await axios({
+      method: "POST",
+      withCredentials: true,
+      url: "https://crystalstocks-backend.herokuapp.com/auth/update_profileURL",
+      data: {
+        id : userID,
+        profilePicture: Url
+      }
+    }).then((res) => {
+    if(res.data === 'ok') {
+        toast.success("Your profile photo was successfully updated");
+      }
+    }).catch((err)=> {
+      console.error(err);
+    });
+  };
+
   // Get Profile Url
   const getProfileUrl = () => {
     setprofileImg(ProfileUrl.current.value);
+    UpdateProfileUrl(ProfileUrl.current.value);
     ProfileUrl.current.value='';
-  }
+    UserObject.profilePicture = ProfileUrl.current.value;
+    LoginObject.UserObject.getUserObjects();
+  };
+
+  // Clear Input 
+  const clearInput = () => {
+    ProfileUrl.current.value='';
+  };
 
   // Logout
   const  logout = async () => {
-   await axios.get("http://localhost:4000/auth/logout", { 
+   await axios.get("https://crystalstocks-backend.herokuapp.com/auth/logout", { 
       withCredentials: true 
     }).then((res) => {
       if(res.data === "done") {
-        window.localStorage.clear();
+        LoginObject.UserObject.setAuth(false);
         window.location.href ="/";
       }
     }).catch((err) => {
@@ -39,8 +65,7 @@ export const Navbar = (LoginObject) => {
   };
 
   return (
-    <nav className='nav-wrapper teal darken-3' id='Browse'>
-
+    <nav className='nav-wrapper teal darken-2' id='Browse'>
       {/* Nav Logo */}
       <Link className="brand-logo" to="/">
         <span className="black-text flow-text">
@@ -65,12 +90,16 @@ export const Navbar = (LoginObject) => {
           </>
         }
         
+        {/* Notifications */}
+        <Toaster />
+        
         {/* Modal */}
         { Auth &&
           <Model 
             ProfileUrl={ProfileUrl} 
             getProfileUrl={getProfileUrl} 
             modelHeader={modelHeader}
+            clearInput={clearInput}
           />
         }
 
@@ -78,11 +107,19 @@ export const Navbar = (LoginObject) => {
         { Auth ?  
           <a className="modal-trigger modalContoller" href="#showModal">
             <li className="Iconimg">
+              { profileImg ?
+              <img 
+                className="circle responsive-img unkownUser"
+                alt="profile-img" 
+                src={profileImg}
+              />   
+              :
               <img 
                 className="circle responsive-img unkownUser"
                 alt="profile-img" 
                 src={UserObject.profilePicture}
               />   
+              }
               <div className="user_detail">
                 <p className="detail_email truncate">{UserObject.email}</p>
                 <p className="detail_username truncate">{UserObject.username}</p>

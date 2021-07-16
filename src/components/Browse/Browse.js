@@ -26,7 +26,7 @@ export const Browse = () => {
 
             {/* Tabs */}
             <div className="col s12">
-              <ul className="teal darken-3 tabs">
+              <ul className="teal darken-2 tabs">
                 <li className="tab col s4"><a className="white-text active" href="#markets">Markets</a></li>
                 <li className="tab col s4"><a className="white-text" href="#news">News</a></li>
                 <li className="tab col s4"><a className="white-text" href="#search">Search</a></li>

@@ -1,85 +1,140 @@
 .Login {
+  margin-bottom: 3em;
   .container {
     padding: 2em;
     background: $headerColor;
-    .Login_leftBox {
-      margin: 1em auto;
+    min-width: 85%;
+    border-radius: 3px;
+    .row {
+      margin-bottom: 0;
     }
-    .toRegister {
-      margin-top: 2em;
-    }
-    .loginHeader {
-      margin-bottom: 2em;
-      img {
-        max-width: 7em;
-      }
-      p {
-        margin-bottom: 1em;
-        margin-top: 0;
+    .Login_rightBox {
+      padding: 0 2em 2em 0em;
+      .loginHeader {
+        padding: 0.25em;
         font-size: 2em;
         font-weight: 700;
-        letter-spacing: 2px;
+        margin-bottom: 1em;
+      }
+    }
+    
+    .login_quote {
+      margin: 1rem auto;
+      padding: .25rem;
+      font-weight: 500;
+      font-size: 1.5rem;
+      p {
+        margin-bottom: 0;
+      }
+    }
+    .title {
+      margin-top: 1em;
+    }
+    .Login_leftBox {
+      margin: 1em auto;
+      padding: 2em;
+    }
+    .loginHeader {
+      img {
+        max-width: 10rem;
+      }
+      span {
+        margin-bottom: 1em;
+        margin-top: 0;
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: 10px;
+      }
+    }
+    .toRegister {
+      width: 100%;
+      text-align: center;
+      font-weight: 500;
+      p {
+        margin-bottom: 1.5em;
       }
     }
   }
-}
-
-.localLogin {
-  margin: 3em auto  1.5em auto;
-  margin-bottom: 2em;
-}
-.googleLogo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  svg {
-    width: 2.5em;
-    height: 2.5em;
-    padding: 5px;
+  .localLogin {
+    margin: 3em auto  1.5em auto;
+    margin-bottom: 2em;
+    min-height: 3rem !important;
   }
+  .googleLogin {
+    button {
+      min-height: 3rem !important;
+      margin-bottom: 2em !important;
+    }
+  }
+  .googleLogo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg {
+      width: 2.5em;
+      height: 2.5em;
+      padding: 5px;
+    }
+  }  
 }
 
 
-.Register, .Login {
-  .row {
-    margin-bottom: 0;
-  }
+.Register {
   margin-bottom: 3em;
   .container {
     padding: 2rem !important  ;
     min-width: 85%;
     border-radius: 3px;
-    .Register_rightBox {
+    .row {
+      margin-bottom: 0;
+    }  
+    .Register_leftBox {
       padding: 0 2em 2em 0em;
+      .title {
+        margin-top: 1em;
+        padding: 0;
+      }
     }
-    .title {
-      margin-top: 1em;
-    }
+   
     .box_row {
       margin-top: 20px;
       margin-bottom: 0;
     }
-    .Register_leftBox {
-      padding: 3em 1em 2.5em 1em !important; 
+    .Register_rightBox {
+      padding: 3em 1em .5em 1em !important; 
       margin: 1em auto;
+      .registerHeader {
+        margin-bottom: 1em;
+        img {
+          max-width: 10rem;
+        }
+        span {
+          margin-bottom: 1em;
+          margin-top: 0;
+          font-size: 2rem;
+          font-weight: 700;
+          letter-spacing: 10px;
+        }
+      }
     }
     .unkownUser {
       width: 4em;
       height: 4em;
     }
     .registerHeader {
-      padding: 0em;
-      font-size: 1.5em;
+      padding: 0.25em;
+      font-size: 2em;
       font-weight: 700;
     }
     .registerBtn {
-      margin-top: 3em;
+      margin-top: 2em;
+      min-height: 3rem!important;
     }
     .register_quote {
-      margin: 1rem auto;
       padding: .25rem;
       font-weight: 500;
       font-size: 1.5rem;
+      margin: 4.5rem auto;
     }
     .custom-icon {
       margin: 0;
@@ -104,6 +159,12 @@
     background: $headerColor;
     .card {
       padding: 1em;
+    }
+    .toLogin {
+      margin-top: 2em;
+      width: 100%;
+      text-align: center;
+      font-weight: 500;
     }
   }
 }

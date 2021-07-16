@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import M from 'materialize-css';
 
-const ProfileUrlModel = ({ProfileUrl, getProfileUrl, modelHeader}) => {  
+const ProfileUrlModel = ({ProfileUrl, getProfileUrl, modelHeader, clearInput}) => {  
 
    // Init Modal Materialize JS
    useEffect (() => {
@@ -31,7 +31,12 @@ const ProfileUrlModel = ({ProfileUrl, getProfileUrl, modelHeader}) => {
             className="modal-close iconSubmit waves-effect waves-light btn"
             >Summit
           </button>
-          <a href="#!" className="modal-close waves-effect waves-light btn">Close</a>
+          <a 
+            onClick={clearInput} 
+            href="#!" 
+            className="modal-close waves-effect waves-light btn"
+            >Close
+          </a>
         </div>
       </div>
     </>

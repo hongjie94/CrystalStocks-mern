@@ -1,6 +1,6 @@
 .History {
   .container {
-    background: $headerColor;
+    background: white;
   }
   .card {
     min-height: 5em;
@@ -26,8 +26,7 @@
     }
     
   }
-  &__footer {
-    display: grid;
-    place-items: center;
+  &__pagination {
+    min-height: 3em;
   }
 }

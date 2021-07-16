@@ -12,7 +12,7 @@ const MobileSideNav = ({
 
   useEffect (() => {
     // Init Sidenav Materialize JS
-    let sidenav = document.querySelectorAll('.sidenav', { passive: true });
+    let sidenav = document.querySelectorAll('.sidenav');
     M.Sidenav.init(sidenav);
   });
   
@@ -20,7 +20,7 @@ const MobileSideNav = ({
   return (
     <div>
       {/* Mobile side nav */}
-      <ul className="sidenav fixed teal darken-3" id="mobile-nav">
+      <ul className="sidenav fixed teal darken-2" id="mobile-nav">
 
         {/* Mobile nav header */}
         {!Auth &&

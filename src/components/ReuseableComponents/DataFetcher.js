@@ -31,7 +31,9 @@ const DataFetcher = (URL) => {
   },[URL]); 
   
   useEffect (() => {
+    const ac = new AbortController();
     getData();
+    return () => ac.abort();
   }, [URL, getData]);
 
   return { FetchData, Loading };

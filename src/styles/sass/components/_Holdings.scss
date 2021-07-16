@@ -1,6 +1,6 @@
 .Holdings {
   .container {
-    background: $headerColor;
+    background: white;
   }
   .card {
     min-height: 2em;
@@ -13,19 +13,27 @@
     .notShow {
       opacity: 0;
     }
+    .companyName {
+      max-width: 13em;
+    }
+    tbody {
+      tr {
+        cursor: pointer;
+      }
+    }
   }
   &__header {
+    background-color: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px 20px;
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding: .5em 0;
+    align-items: flex-end;
     .svg {
-      max-width: 6em;
+      max-width: 10em;
     }
-    span {
+    h4 {
       font-weight: 500;
-      color: $headerColor;
-      font-size: 3em;
     }
     
   }

@@ -1,20 +1,58 @@
 .Favorites {
   .container {
     .collection {
-      .collection-item {
+      .NoFavorite {
         display: flex;
         justify-content: center;
-        flex-direction: column;
+        align-items: flex-start;
+        padding: 2em;
+      }
+      .collection-header {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        img {
+          width: 7em;
+        }
+        h4 {
+          font-weight: 500;
+        }
+      }
+      .collection-item {
+        display: flex;
+        align-items: center;
+        i {
+          &:hover {
+            cursor: pointer;
+          }
+        }
         .content {
           display: flex;
           justify-content: space-between;
           width: 90%;
           &__left {
-            width: 30%;
-          }
-          &__center,  &__right {
             display: flex;
-            align-items: flex-end;
+            align-items: center;
+            .companyName {
+              width: 10em !important;
+              font-size: 13px;
+              color: rgba(0,0,0,0.5);
+            }
+          }
+          &__center {
+            display: flex;
+            align-items: center;
+            p {
+              font-weight: 500;
+              min-width: 4em !important;
+            }
+          }
+          &__right {
+            display: flex;
+            flex-direction: row;
+            button {
+              margin: 1em !important;
+            }
           }
         }
         .tradeBtns {
@@ -29,6 +67,54 @@
         }
       }
     }
+  }
+}
+.mobilTradeBtn {
+  display: none;
+  width: 90%;
+  justify-content: flex-end;
+  button {
+    margin: 1em .5em .5em .5em;
+  }
+}
+
+
+@media #{$small-and-down} {
+  
+  .mobilTradeBtn {
+    display: flex;
+  }
+  .secondary-content {
+    position: absolute;
+    top: 5px !important;
+    right: 10px !important;
+  }
+  .Favorites {
+    .container {
+      .collection {
+        .collection-item {
+          display: block;
+          .content {
+            &__right {
+              display: flex;
+              flex-direction: column;
+              button {
+                margin: 0 .5em 1em 0.5em !important;
+              } 
+            }
+            &__left {
+              width: 7em !important;
+            } 
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 320px) { 
+  .Favorites .container .collection .collection-item .content__left .companyName {
+    width: 8em !important;
   }
 }
 

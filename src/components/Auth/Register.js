@@ -4,8 +4,10 @@ import { LoginContext } from '../../contexts/UserContext';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import registerImg from '../../images/register.svg';
+import registerHeader from '../../images/register_header.svg';
 import unkownUser from '../../images/unkownUser.png';
 import Model from '../ReuseableComponents/ProfileUrlModel';
+import { NavLink} from 'react-router-dom';
 
 export const Register = () => {
 
@@ -90,8 +92,8 @@ export const Register = () => {
         <div className="container">
           <div className="row center box_row">
 
-          {/* Right Box Content */}  
-          <div className="col s12 m12 l6 Register_rightBox" > 
+          {/* Left Box Content */}  
+          <div className="col s12 m12 l6 hide-on-med-and-down Register_leftBox" > 
 
             {/* Header */}  
             <div className="title center card teal lighten-1"> 
@@ -112,13 +114,20 @@ export const Register = () => {
             />
           </div>
 
+           
           {/* Left Box Content */}  
-          <div className="col s12 m12 l6 card Register_leftBox" >
+          <div className="col s12 m12 l6 card Register_rightBox" >
 
             {/* Notifications */}
             <Toaster />
-
+          
             <form className="col s12" ref={form} onSubmit={RegisterUser}>
+              
+            {/* Register Header */}
+            <div className="title registerHeader center"> 
+              <img className="responsive-img" src={registerHeader} alt=""/>
+              <span className=" teal-text"> Register</span>
+            </div>
 
             {/* Custom icon */}
             <div className="row custom-icon">
@@ -204,6 +213,10 @@ export const Register = () => {
             {/* Summit button */}
             <button className="registerBtn btn waves-effect waves-light col s12" type="submit" name="action">Regesiter</button>
             </div>
+            <p className="toLogin">Already have an account? 
+              <NavLink className="teal-text" to="/login"> Login </NavLink> 
+              here
+            </p>
           </form>
           </div>
         </div>
