@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'; //HashRouter
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Navbar } from './components//Navbar/Navbar';
 import { Browse } from './components/Browse/Browse';
 import { Holdings } from './components/Holdings/Holdings';
