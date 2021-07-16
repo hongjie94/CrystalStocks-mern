@@ -58,7 +58,6 @@ export const Navbar = (LoginObject) => {
       if(res.data === "done") {
         LoginObject.UserObject.setAuth(false);
         history.push("/");
-        // window.location.href ="/";
       }
     }).catch((err) => {
       console.log(err);
