@@ -69,6 +69,7 @@ export default function Context({children}) {
   // Get User Objects
   const getUserObjects =  useCallback(async () =>{
     await axios.get( `${baseURL}/auth/getuser`, { 
+      headers: {"Access-Control-Allow-Origin": "*"},
       withCredentials: true }
       ).then((res) => {
         if (res.data) {
