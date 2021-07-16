@@ -76,7 +76,7 @@ export const Register = () => {
           password: registerPassword,
         },
         withCredentials: true,
-        url: "http://localhost:4000/auth/register",
+        url: "https://crystalstocks-backend.herokuapp.com/auth/register",
       }).then((res, error) => {
         if(error) {
           console.log(error);
