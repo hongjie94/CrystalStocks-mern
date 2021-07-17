@@ -81,7 +81,7 @@ export default function Context({children}) {
       }).catch((err)=> {
         console.error(err);
       });
-  }, [saveDataToLocalStorage, getStockHistories, getHoldings]);
+  }, []); //saveDataToLocalStorage, getStockHistories, getHoldings
 
  
   // Update User Objects if login method is local
