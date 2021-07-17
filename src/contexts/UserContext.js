@@ -74,9 +74,9 @@ export default function Context({children}) {
         if (res.data) {
           setUserObject(res.data);
           setAuth(true);
-          saveDataToLocalStorage(res.data.watchlist);
-          getStockHistories();
-          getHoldings();
+//           saveDataToLocalStorage(res.data.watchlist);
+//           getStockHistories();
+//           getHoldings();
         }
       }).catch((err)=> {
         console.error(err);
