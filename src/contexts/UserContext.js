@@ -31,6 +31,7 @@ export default function Context({children}) {
     await axios({
       method: "POST",
       withCredentials: true,
+      credentials: 'include',
       url: `${baseURL}/api/histories/sync`,
       data: {
         user_id: UserObject.id
@@ -69,6 +70,7 @@ export default function Context({children}) {
   // Get User Objects
   const getUserObjects =  useCallback(async () =>{
     await axios.get( `${baseURL}/auth/getuser`, { 
+      credentials: 'include',      
       withCredentials: true }
       ).then((res) => {
         if (res.data) {
