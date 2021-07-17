@@ -20,11 +20,10 @@ export const Login = () => {
   };
   
   // Local login
-  const localLogin = (e) => {
+  const localLogin = async (e) => {
     e.preventDefault();
-    Axios({
+    await Axios({
       method: "POST",
-      withCredentials: true,
       credentials: 'include',
       url: "https://crystalstocks-backend.herokuapp.com/auth/login",
       data: {
