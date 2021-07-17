@@ -24,7 +24,7 @@ export const Login = () => {
     e.preventDefault();
     await Axios({
       method: "POST",
-      credentials: 'include',
+      withCredentials: true,
       url: "https://crystalstocks-backend.herokuapp.com/auth/login",
       data: {
         username: loginUsername.toUpperCase(),
@@ -35,8 +35,8 @@ export const Login = () => {
         toast.error("The username you entered does not exist!");
       } else {
           LoginObject.UpdateUserObject(res.data);
+//           toast.success("Hello. You are now successfully logged in. Welcome back!");
           window.location.href ="/holdings";
-          toast.success("Hello. You are now successfully logged in. Welcome back!");
         }
       }
     );
