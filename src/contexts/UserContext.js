@@ -30,7 +30,7 @@ export default function Context({children}) {
   const getStockHistories = useCallback( async () =>{
     await axios({
       method: "POST",
-      credentials: 'include',
+      withCredentials: true,
       url: `${baseURL}/api/histories/sync`,
       data: {
         user_id: UserObject.id
@@ -69,8 +69,9 @@ export default function Context({children}) {
   // Get User Objects
   const getUserObjects =  useCallback(async () =>{
     await axios.get( `${baseURL}/auth/getuser`, { 
-      credentials: 'include'     //   withCredentials: true,
+      withCredentials: true
     }).then((res) => {
+         console.log(res)
         if (res.data) {
           setUserObject(res.data);
           setAuth(true);
