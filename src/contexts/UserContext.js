@@ -86,8 +86,8 @@ export default function Context({children}) {
  
   // Update User Objects if login method is local
   const UpdateUserObject = useCallback((obj) => {
-    setUserObject(obj);
     setAuth(true);
+    setUserObject(obj);
   },[]);
 
 
