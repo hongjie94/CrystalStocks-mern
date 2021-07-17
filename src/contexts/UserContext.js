@@ -30,7 +30,6 @@ export default function Context({children}) {
   const getStockHistories = useCallback( async () =>{
     await axios({
       method: "POST",
-      withCredentials: true,
       credentials: 'include',
       url: `${baseURL}/api/histories/sync`,
       data: {
@@ -70,9 +69,8 @@ export default function Context({children}) {
   // Get User Objects
   const getUserObjects =  useCallback(async () =>{
     await axios.get( `${baseURL}/auth/getuser`, { 
-      credentials: 'include',      
-      withCredentials: true }
-      ).then((res) => {
+      credentials: 'include'     //   withCredentials: true,
+    }).then((res) => {
         if (res.data) {
           setUserObject(res.data);
           setAuth(true);
@@ -87,9 +85,9 @@ export default function Context({children}) {
 
  
   // Update User Objects if login method is local
-  const UpdateUserObject = useCallback((obj) => {
-    setAuth(true);
-    setUserObject(obj);
+  const UpdateUserObject = useCallback( async (obj) => {
+    await setAuth(true);
+    await setUserObject(obj);
   },[]);
 
 
