@@ -27,7 +27,7 @@ export default function Context({children}) {
 
 
   // Get User Histories
-  const getStockHistories =  useCallback( async () =>{
+  const getStockHistories = useCallback( async () =>{
     await axios({
       method: "POST",
       withCredentials: true,
@@ -74,14 +74,14 @@ export default function Context({children}) {
         if (res.data) {
           setUserObject(res.data);
           setAuth(true);
-//           saveDataToLocalStorage(res.data.watchlist);
-//           getStockHistories();
-//           getHoldings();
+          saveDataToLocalStorage(res.data.watchlist);
+          getStockHistories();
+          getHoldings();
         }
       }).catch((err)=> {
         console.error(err);
       });
-  }, []); //saveDataToLocalStorage, getStockHistories, getHoldings
+  }, [saveDataToLocalStorage, getStockHistories, getHoldings]);
 
  
   // Update User Objects if login method is local
@@ -334,7 +334,7 @@ export default function Context({children}) {
 
   useEffect(() => {
     getUserObjects();
-  },[getUserObjects, UpdateUserObject]);
+  },[getUserObjects]);
 
   return (
     <LoginContext.Provider value={{
