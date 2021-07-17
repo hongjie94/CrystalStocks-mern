@@ -7,6 +7,16 @@ export const TransactionContext = createContext({});
 
 export default function Context({children}) {
     
+  let headers = new Headers();
+
+  headers.append('Content-Type', 'application/json');
+  headers.append('Accept', 'application/json');
+
+  headers.append('Access-Control-Allow-Origin', 'https://crystalstocks.netlify.app');
+  headers.append('Access-Control-Allow-Credentials', 'true');
+
+  headers.append('GET', 'POST', 'OPTIONS');  
+    
   const [UserObject, setUserObject] = useState('');
   const [StockHistories, setStockHistories] = useState('');
   const [UserHoldings, setUserHoldings] = useState('');
@@ -333,10 +343,7 @@ export default function Context({children}) {
 
 
   useEffect(() => {
-    const ac = new AbortController();
     getUserObjects();
-    return () => ac.abort();
-
   },[getUserObjects, UpdateUserObject]);
 
   return (
