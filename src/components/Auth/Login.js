@@ -34,7 +34,6 @@ export const Login = () => {
       if(res.data === 'No User Exists') {
         toast.error("The username you entered does not exist!");
       } else {
-          LoginObject.setAuth(true);
           LoginObject.UpdateUserObject(res.data);
           window.location.href ="/holdings";
           toast.success("Hello. You are now successfully logged in. Welcome back!");
