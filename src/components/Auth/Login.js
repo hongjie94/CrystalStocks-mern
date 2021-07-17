@@ -25,6 +25,7 @@ export const Login = () => {
     Axios({
       method: "POST",
       withCredentials: true,
+      credentials: 'include',
       url: "https://crystalstocks-backend.herokuapp.com/auth/login",
       data: {
         username: loginUsername.toUpperCase(),
