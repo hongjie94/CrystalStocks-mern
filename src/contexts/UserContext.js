@@ -70,8 +70,7 @@ export default function Context({children}) {
   // Get User Objects
   const getUserObjects =  useCallback(async () =>{
     await axios.get( `${baseURL}/auth/getuser`, { 
-      withCredentials: true,
-      credentials: "includes"
+      withCredentials: true
     }).then((res) => {
         if (res.data) {
           setUserObject(res.data);
@@ -321,11 +320,9 @@ export default function Context({children}) {
 
   // Get Symbol Datas
   const GetSymbolDatas = async (symbol) => {  
-    const ac = new AbortController();
     if((symbol.toString()).length > 0) {
       axios({
         method: 'get',
-        signal: ac.signal,
         url: `https://sandbox.iexapis.com/stable/stock/${symbol}/quote?token=${process.env.REACT_APP_IEXAPI_TOKEN}`
       }).then(res => {
         if(res) {
