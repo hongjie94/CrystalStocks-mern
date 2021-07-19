@@ -6,7 +6,7 @@ export const LoginContext = createContext({});
 export const TransactionContext = createContext({});
 
 export default function Context({children}) {
-    
+        
   const [UserObject, setUserObject] = useState('');
   const [StockHistories, setStockHistories] = useState('');
   const [UserHoldings, setUserHoldings] = useState('');
@@ -28,7 +28,7 @@ export default function Context({children}) {
 
 
   // Get User Histories
-  const getStockHistories =  useCallback( async () =>{
+  const getStockHistories = useCallback( async () =>{
     await axios({
       method: "POST",
       withCredentials: true,
@@ -88,7 +88,6 @@ export default function Context({children}) {
  
   // Update User Objects if login method is local
   const UpdateUserObject = useCallback((obj) => {
-    alert('UpdateUserObject')
     setAuth(true);
     setUserObject(obj);
   },[]);
@@ -337,9 +336,7 @@ export default function Context({children}) {
   };
 
   useEffect(() => {
-    const ac = new AbortController();
     getUserObjects();
-    return () => ac.abort();
   },[getUserObjects, UpdateUserObject]);
 
   return (
