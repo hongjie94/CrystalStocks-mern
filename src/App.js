@@ -9,6 +9,7 @@ import { Login } from './components/Auth/Login';
 import { Register } from './components/Auth/Register';
 import { Footer } from './components/Footer/Footer';
 import { LoginContext } from './contexts/UserContext';
+import {NotFound} from './components/NotFound';
 function App() {
   
   const LoginObject = useContext(LoginContext);
@@ -24,6 +25,7 @@ function App() {
             <Route path="/history" component={History} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
+            <Route path="*" component={NotFound} />
           </Switch>  
         <Footer UserObject={LoginObject}/>
       </div>

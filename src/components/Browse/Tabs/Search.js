@@ -9,7 +9,6 @@ import GetSymbolData from '../../ReuseableComponents/GetSymbolData';
 import { StaticDialog } from 'react-st-modal';
 import TradeModel from '../../ReuseableComponents/TradeModel';
 import TradeModelFunctions from '../../ReuseableComponents/TradeModelFunctions';
-import { Toaster } from 'react-hot-toast';
 import ToggleFavorites from '../../ReuseableComponents/ToggleFavorites';
 
 const Search = () => {
@@ -27,6 +26,22 @@ const Search = () => {
   const updateSearchQuote =(icon, color) => {
     searchQuote = {icon: icon, color: color};
   };
+
+  // Number Converter
+  const NumberConverter = (Value) => {
+    const sign = Math.sign(Number(Value));
+     // Nine Zeroes for Billions
+    return Math.abs(Number(Value)) >= 1.0e9
+      ? ( sign * (Math.abs(Number(Value)) / 1.0e9).toFixed(2)) + "B"
+      : // Six Zeroes for Millions
+      Math.abs(Number(Value)) >= 1.0e6
+      ? (sign * (Math.abs(Number(Value)) / 1.0e6)).toFixed(2) + "M"
+      : // Three Zeroes for Thousands
+      Math.abs(Number(Value)) >= 1.0e3
+      ? (sign * (Math.abs(Number(Value)) / 1.0e3)).toFixed(2) + "K"
+      : Math.abs(Number(Value));
+  }
+    
 
   const { 
     isOpen, 
@@ -64,9 +79,10 @@ const Search = () => {
       <div className="Searchcontent">
         <div className="card">
           <div className="container">
-            <Toaster/>
+            
             {/* Symbol Info */}
             <div className="row">
+            
               {
                 (SymbolData !== 'Unknown symbol' && SymbolData.companyName) &&
                 <>
@@ -154,14 +170,14 @@ const Search = () => {
                     <div className="col s12 m6 SymbolDetails">
                       <p>Open: {SymbolData.open}</p>
                       <p>Close: {SymbolData.close}</p>
-                      <p>Volume: {SymbolData.avgTotalVolume}</p>
+                      <p>Volume: {NumberConverter(SymbolData.avgTotalVolume)}</p>
                       <p>High: {SymbolData.high}</p>
                       <p>Low: {SymbolData.low}</p>
                     </div>
                     <div className="col s12 m6 SymbolDetails">
-                      <p>Market Cap: {SymbolData.marketCap}</p>
+                      <p>Market Cap: {NumberConverter(SymbolData.marketCap)}</p>
                       <p>Previous Close: {SymbolData.previousClose}</p>
-                      <p>Previous Volume: {SymbolData.previousVolume}</p>
+                      <p>Previous Volume: {NumberConverter(SymbolData.previousVolume)}</p>
                       <p>52 Wk High: {SymbolData.week52High}</p>
                       <p>52 Wk Low: {SymbolData.week52Low}</p>
                     </div>
@@ -203,6 +219,7 @@ const Search = () => {
                   }
                 </div>
               }
+            
             </div>
           </div>
         </div>     

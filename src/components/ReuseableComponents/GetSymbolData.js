@@ -6,6 +6,7 @@ const GetSymbolData = (propSymbol) => {
   const [SymbolData, setSymbolData] = useState('');
 
   useEffect(() => {
+    const ac = new AbortController();
     const FetchForSymbolData = async () => {
       if((propSymbol.toString()).length > 0) {
         await axios({
@@ -24,6 +25,7 @@ const GetSymbolData = (propSymbol) => {
       }
     }
     FetchForSymbolData();
+    return () => ac.abort();
   }, [propSymbol]);
 
   return { SymbolData };

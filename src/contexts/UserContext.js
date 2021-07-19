@@ -12,6 +12,7 @@ export default function Context({children}) {
   const [UserHoldings, setUserHoldings] = useState('');
   const [Auth, setAuth] = useState(false);
   const baseURL = 'https://crystalstocks-backend.herokuapp.com';
+  // const baseURL = 'http://localhost:4000';
 
 
   // Save symbol datas to Local Storage
@@ -69,8 +70,9 @@ export default function Context({children}) {
   // Get User Objects
   const getUserObjects =  useCallback(async () =>{
     await axios.get( `${baseURL}/auth/getuser`, { 
-      withCredentials: true }
-      ).then((res) => {
+      withCredentials: true,
+      credentials: "includes"
+    }).then((res) => {
         if (res.data) {
           setUserObject(res.data);
           setAuth(true);
@@ -86,8 +88,9 @@ export default function Context({children}) {
  
   // Update User Objects if login method is local
   const UpdateUserObject = useCallback((obj) => {
-    setUserObject(obj);
+    alert('UpdateUserObject')
     setAuth(true);
+    setUserObject(obj);
   },[]);
 
 
@@ -319,9 +322,11 @@ export default function Context({children}) {
 
   // Get Symbol Datas
   const GetSymbolDatas = async (symbol) => {  
+    const ac = new AbortController();
     if((symbol.toString()).length > 0) {
       axios({
         method: 'get',
+        signal: ac.signal,
         url: `https://sandbox.iexapis.com/stable/stock/${symbol}/quote?token=${process.env.REACT_APP_IEXAPI_TOKEN}`
       }).then(res => {
         if(res) {
@@ -331,12 +336,10 @@ export default function Context({children}) {
     }
   };
 
-
   useEffect(() => {
     const ac = new AbortController();
     getUserObjects();
     return () => ac.abort();
-
   },[getUserObjects, UpdateUserObject]);
 
   return (

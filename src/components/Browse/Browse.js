@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import News from './Tabs/News';
 import Markets from './Tabs/Markets';
 import Search from './Tabs/Search';
+import { Toaster } from 'react-hot-toast';
 import M from 'materialize-css';
 
 
@@ -23,7 +24,7 @@ export const Browse = () => {
     <div className="Browse">
         <div className="container">  
           <div className="row">
-
+          <Toaster/>
             {/* Tabs */}
             <div className="col s12">
               <ul className="teal darken-2 tabs">

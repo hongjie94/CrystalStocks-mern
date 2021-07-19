@@ -27,6 +27,42 @@ body {
 .Trading, 
 .History {
   min-height: 75vh !important;
-  padding: 1em 0 5em 0;
-  margin-top: 3rem;
+  padding: 4rem 0 5em 0;
+  background:  hsl(168, 40%, 40%);
+}
+
+.not-found {
+  display: grid;
+  place-items: center;
+  padding: 5em 3em;
+  min-height: 70vh;
+  .responsive-img{
+    max-width: 350px;
+  }
+  .row {
+    display: flex;
+    align-items: flex-end;
+  }
+  .text {
+    padding: 10px 2.5em !important;
+  }
+  &__text {
+    h2 {
+      margin: 0;
+    }
+    a {
+      color: white;
+      &:hover {
+        color: hsl(0, 0%, 70%);
+      }
+    }
+  }
+}
+
+@media #{$medium-and-down} {
+  .not-found {
+    .row {
+      display: block;
+    }
+  }
 }

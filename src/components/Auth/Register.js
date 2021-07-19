@@ -32,10 +32,10 @@ export const Register = () => {
   const modelHeader = "Custom Profile Photo";
 
   // Successfully registered 
-  const notifySuccess = (userObject) => {
-    LoginObject.UpdateUserObject(userObject);
-    toast.success('Registered successfully.');
-    history.push('/holdings');
+  const notifySuccess = async (userObject) => {
+    await LoginObject.UpdateUserObject(userObject);
+    await toast.success('Registered successfully.');
+    history.push('/history');
   };
 
   // Passwords don't match
@@ -76,7 +76,8 @@ export const Register = () => {
           password: registerPassword,
         },
         withCredentials: true,
-        url: "https://crystalstocks-backend.herokuapp.com/auth/register",
+        url: "https://crystalstocks-backend.herokuapp.com/auth/register"
+        // url: "http://localhost:4000/auth/register"
       }).then((res, error) => {
         if(error) {
           console.log(error);

@@ -12,10 +12,8 @@ const Markets = () => {
 
   // Init Tooltip Materialize JS
   useEffect(() => {
-    const ac = new AbortController();
     let Tooltipped = document.querySelectorAll('.tooltipped');
     M.Tooltip.init(Tooltipped);
-    return () => ac.abort();
   });
 
   // Get current user objects
@@ -108,6 +106,7 @@ const Markets = () => {
                     <th>PRICE</th>
                     <th></th>
                     <th>CHANGE</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>

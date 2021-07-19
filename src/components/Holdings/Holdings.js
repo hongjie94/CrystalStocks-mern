@@ -104,10 +104,18 @@ export const Holdings = () => {
                   { UserHoldings && 
                     UserHoldings.length === 0 ?
                     <tr>
-                      <td>Your Holding Is Empty ...</td>
+                      <td>Your have 0 Holdings...</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
                     </tr>
                      :
                     <tr>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
                       <td>&nbsp;</td>
                     </tr>
                   }

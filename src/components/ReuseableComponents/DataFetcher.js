@@ -15,7 +15,7 @@ const DataFetcher = (URL) => {
       headers: {
         'x-rapidapi-key': `${process.env.REACT_APP_RAPIDAPI_KEY2}`,
         'x-rapidapi-host': 'yahoo-finance15.p.rapidapi.com'
-      }
+      },
     }
    await axios.request(options).then((res) => {  
     if(res) {
@@ -31,9 +31,7 @@ const DataFetcher = (URL) => {
   },[URL]); 
   
   useEffect (() => {
-    const ac = new AbortController();
     getData();
-    return () => ac.abort();
   }, [URL, getData]);
 
   return { FetchData, Loading };

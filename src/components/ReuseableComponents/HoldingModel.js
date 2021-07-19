@@ -15,7 +15,21 @@ const HoldingModel = ({SymbolName, SymbolShares, disable, setDisable, setShares,
   const updateSearchQuote =(icon, color) => {
     searchQuote = {icon: icon, color: color};
   };
-  
+
+  const NumberConverter = (Value) => {
+    const sign = Math.sign(Number(Value));
+     // Nine Zeroes for Billions
+    return Math.abs(Number(Value)) >= 1.0e9
+      ? ( sign * (Math.abs(Number(Value)) / 1.0e9).toFixed(2)) + "B"
+      : // Six Zeroes for Millions
+      Math.abs(Number(Value)) >= 1.0e6
+      ? (sign * (Math.abs(Number(Value)) / 1.0e6)).toFixed(2) + "M"
+      : // Three Zeroes for Thousands
+      Math.abs(Number(Value)) >= 1.0e3
+      ? (sign * (Math.abs(Number(Value)) / 1.0e3)).toFixed(2) + "K"
+      : Math.abs(Number(Value));
+  }
+    
   return (
   
     <div className="HoldingModelContent">
@@ -156,14 +170,14 @@ const HoldingModel = ({SymbolName, SymbolShares, disable, setDisable, setShares,
             <div className="col s12 m6 MarketDetails ">
               <span>Open: {SymbolData.open}</span> 
               <span>Close: {SymbolData.close}</span>
-              <span>Volume: {SymbolData.avgTotalVolume}</span>
+              <span>Volume: {NumberConverter(SymbolData.avgTotalVolume)}</span>
               <span>High: {SymbolData.high}</span> 
               <span>Low: {SymbolData.low}</span> 
             </div>
             <div className="col s12 m6 MarketDetails">
-              <span>Market Cap: {SymbolData.marketCap}</span> 
+              <span>Market Cap: {NumberConverter(SymbolData.marketCap)}</span> 
               <span>Previous Close: {SymbolData.previousClose}</span>
-              <span>Previous Volume: {SymbolData.previousVolume}</span>
+              <span>Previous Volume: {NumberConverter(SymbolData.previousVolume)}</span>
               <span>Week 52 High: {SymbolData.week52High}</span>
               <span>Week 52 Low: {SymbolData.week52Low}</span>
             </div>

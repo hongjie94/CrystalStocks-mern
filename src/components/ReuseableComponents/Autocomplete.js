@@ -7,10 +7,8 @@ const Autocomplete = ({InputValue,setInputValue,setCurSymbol, setLoading}) => {
   
   // Init Autocomplete Materialize JS
   useEffect(() => {
-    const ac = new AbortController();
     let Autocomplete = document.querySelectorAll('.autocomplete');
     M.Autocomplete.init(Autocomplete, options);
-    return () => ac.abort();
   });
 
   // Get Symbols 

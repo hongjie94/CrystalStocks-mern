@@ -5,8 +5,12 @@ import loginImg from '../../images/login.svg';
 import loginHeader from '../../images/login_header.svg';
 import { NavLink} from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import { useHistory } from "react-router-dom";
 
 export const Login = () => {
+
+  // useHistory
+  const history = useHistory();
 
   const LoginObject = useContext(LoginContext);
 
@@ -20,12 +24,14 @@ export const Login = () => {
   };
   
   // Local login
-  const localLogin = (e) => {
+  const localLogin = async (e) => {
     e.preventDefault();
-    Axios({
+    await Axios({
       method: "POST",
       withCredentials: true,
+      credentials: "includes",
       url: "https://crystalstocks-backend.herokuapp.com/auth/login",
+      // url: "http://localhost:4000/auth/login",
       data: {
         username: loginUsername.toUpperCase(),
         password: loginPassword,
@@ -33,14 +39,12 @@ export const Login = () => {
     }).then((res) => {
       if(res.data === 'No User Exists') {
         toast.error("The username you entered does not exist!");
-      } else {
-          LoginObject.setAuth(true);
-          LoginObject.UpdateUserObject(res.data);
-          window.location.href ="/holdings";
-          toast.success("Hello. You are now successfully logged in. Welcome back!");
-        }
+      } else{
+        LoginObject.UpdateUserObject(res.data);
+        toast.success("Hello. You are now successfully logged in. Welcome back!");
+        history.push('/history');
       }
-    );
+    });
   };
 
   return (
