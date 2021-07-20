@@ -70,8 +70,7 @@ export default function Context({children}) {
   // Get User Objects
   const getUserObjects =  useCallback(async () =>{
     await axios.get( `${baseURL}/auth/getuser`, { 
-      withCredentials: true,
-      headers: {'Access-Control-Allow-Origin': 'https://crystalstocks.netlify.app', 'Content-Type': 'application/json'}
+      withCredentials: true
     }).then((res) => {
         if (res.data) {
           setUserObject(res.data);
