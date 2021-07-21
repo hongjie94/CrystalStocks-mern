@@ -14,7 +14,7 @@ export default function Context({children}) {
   const baseURL = 'https://crystalstocks-backend.herokuapp.com';
   // const baseURL = 'http://localhost:4000';
 
-  
+
   // Save symbol datas to Local Storage
   const saveDataToLocalStorage = useCallback((SymbolList) => {
     if(SymbolList.length === 1) {
