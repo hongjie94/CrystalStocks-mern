@@ -20,7 +20,7 @@ export const Login = () => {
   // Google login
   const googleLogin = ()=>{
     toast.loading('Sign in with Google...');
-    window.open("http://localhost:4000/auth/google", "_self");
+    window.open("https://crystalstocks-backend.herokuapp.com/auth/google", "_self");
   };
   
   // Local login
