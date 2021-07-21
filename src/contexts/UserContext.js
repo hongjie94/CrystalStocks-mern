@@ -73,6 +73,7 @@ export default function Context({children}) {
       withCredentials: true
     }).then((res) => {
         if (res.data) {
+          console.log('id', res.data._id);
           console.log('getUserObjects');
           setUserObject(res.data);
           setAuth(true);
