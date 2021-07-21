@@ -69,14 +69,11 @@ export default function Context({children}) {
   
   // Get User Objects
   const getUserObjects =  useCallback(async () =>{
-    alert('getUserObjects');
     await axios.get( `${baseURL}/auth/getuser`, { 
-      credentials: 'include',
       withCredentials: true
     }).then((res) => {
         if (res.data) {
-          alert('getUserObjects');
-          console.log(res.data);
+          console.log('getUserObjects');
           setUserObject(res.data);
           setAuth(true);
           saveDataToLocalStorage(res.data.watchlist);
