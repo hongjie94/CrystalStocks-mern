@@ -14,7 +14,7 @@ export default function Context({children}) {
   const baseURL = 'https://crystalstocks-backend.herokuapp.com';
   // const baseURL = 'http://localhost:4000';
 
-
+  
   // Save symbol datas to Local Storage
   const saveDataToLocalStorage = useCallback((SymbolList) => {
     if(SymbolList.length === 1) {
@@ -28,13 +28,13 @@ export default function Context({children}) {
 
 
   // Get User Histories
-  const getStockHistories = useCallback( async () =>{
+  const getStockHistories = useCallback( async (UserID) =>{
     await axios({
       method: "POST",
       withCredentials: true,
       url: `${baseURL}/api/histories/sync`,
       data: {
-        user_id: UserObject.id
+        user_id: UserID
       }
     }).then((res) => {
       if(res.data) {
@@ -43,17 +43,17 @@ export default function Context({children}) {
     }).catch((err)=> {
       console.error(err);
     });
-  }, [UserObject.id]);
+  }, []);
 
 
   // Get User Holdings
-  const getHoldings =  useCallback(async () =>{
+  const getHoldings =  useCallback(async (UserID) =>{
     await axios({
       method: "POST",
       withCredentials: true,
       url: `${baseURL}/api/stocks/sync`,
       data: {
-        user_id: UserObject.id
+        user_id: UserID
       }
     }).then((res) => {
         if (res.data) {
@@ -64,33 +64,29 @@ export default function Context({children}) {
       }).catch((err)=> {
         console.error(err);
       });
-  }, [UserObject.id]);
+  }, []);
 
   
   // Get User Objects
   const getUserObjects =  useCallback(async () =>{
+    alert('getUserObjects');
     await axios.get( `${baseURL}/auth/getuser`, { 
+      credentials: 'include',
       withCredentials: true
     }).then((res) => {
         if (res.data) {
+          alert('getUserObjects');
+          console.log(res.data);
           setUserObject(res.data);
           setAuth(true);
           saveDataToLocalStorage(res.data.watchlist);
-          getStockHistories();
-          getHoldings();
+          getStockHistories(res.data._id);
+          getHoldings(res.data._id);
         }
       }).catch((err)=> {
         console.error(err);
       });
   }, [saveDataToLocalStorage, getStockHistories, getHoldings]);
-
- 
-  // Update User Objects if login method is local
-  const UpdateUserObject = useCallback((obj) => {
-    setAuth(true);
-    setUserObject(obj);
-  },[]);
-
 
   // Update Watchlist
   const UpdateWatchlist = async (symbol, method) => {
@@ -334,18 +330,20 @@ export default function Context({children}) {
 
   useEffect(() => {
     getUserObjects();
-  },[getUserObjects, UpdateUserObject]);
+  },[getUserObjects]);
 
   return (
     <LoginContext.Provider value={{
       UserObject, 
       Auth, 
       setAuth,
-      UpdateUserObject, 
       UpdateWatchlist,
       getUserObjects,
+      getStockHistories,
+      getHoldings,
       StockHistories,
       UserHoldings,
+      setUserObject,
       saveDataToLocalStorage,
       Trade
     }}>

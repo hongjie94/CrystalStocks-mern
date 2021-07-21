@@ -20,7 +20,7 @@ export const Login = () => {
   // Google login
   const googleLogin = ()=>{
     toast.loading('Sign in with Google...');
-    window.open("https://crystalstocks-backend.herokuapp.com/auth/google", "_self");
+    window.open("http://localhost:4000/auth/google", "_self");
   };
   
   // Local login
@@ -29,6 +29,7 @@ export const Login = () => {
     await Axios({
       method: "POST",
       withCredentials: true,
+      credentials: 'include',
       url: "https://crystalstocks-backend.herokuapp.com/auth/login",
       // url: "http://localhost:4000/auth/login",
       data: {
@@ -38,8 +39,9 @@ export const Login = () => {
     }).then((res) => {
       if(res.data === 'No User Exists') {
         toast.error("The username you entered does not exist!");
-      } else{
-        LoginObject.UpdateUserObject(res.data);
+      }
+      if(res.data === 'Successfully Authenticated') {
+        LoginObject.getUserObjects();
         toast.success("Hello. You are now successfully logged in. Welcome back!");
         history.push('/history');
       }
