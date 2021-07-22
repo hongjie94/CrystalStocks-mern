@@ -73,12 +73,14 @@ export default function Context({children}) {
       withCredentials: true
     }).then((res) => {
         if (res.data) {
-          alert('getUserObjects');
+          console.log('Get User Objects Successfully');
           setUserObject(res.data);
           setAuth(true);
           saveDataToLocalStorage(res.data.watchlist);
           getStockHistories(res.data.id);
           getHoldings(res.data.id);
+        } else {
+          console.log(res)
         }
       }).catch((err)=> {
         console.error(err);
