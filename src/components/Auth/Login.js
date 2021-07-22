@@ -5,12 +5,9 @@ import loginImg from '../../images/login.svg';
 import loginHeader from '../../images/login_header.svg';
 import { NavLink} from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
-import { useHistory } from "react-router-dom";
+
 
 export const Login = () => {
-
-  // useHistory
-  const history = useHistory();
 
   const LoginObject = useContext(LoginContext);
 
@@ -42,7 +39,7 @@ export const Login = () => {
       if(res.data === 'Successfully Authenticated') {
         LoginObject.getUserObjects();
         toast.success("Hello. You are now successfully logged in. Welcome back!");
-        history.push('/history');
+        window.location.href = '/history';
       }
     });
   };
