@@ -45,7 +45,7 @@ export const Navbar = (LoginObject) => {
       url: "https://crystalstocks-backend.herokuapp.com/auth/login",
       data: {
         username: 'DEMO',
-        password: 123456,
+        password: '123456',
       }
     }).then((res) => {
       if(res.data === 'Successfully Authenticated') {
