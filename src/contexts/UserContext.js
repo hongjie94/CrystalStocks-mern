@@ -83,7 +83,7 @@ export default function Context({children}) {
         }
       }).catch((err)=> {
         // can be slove by set cname record + subdomain on backend
-        // alert('Safari is not sharing the cookies due to Prevent cross-site tracking setting being enabled. Disable prevent cross site tracking in safari to login or switch browser to Chrome/Firefox.');
+        alert('Safari is not sharing the cookies due to Prevent cross-site tracking setting being enabled. Disable prevent cross site tracking in safari to login or switch browser to Chrome/Firefox.');
         console.error(err);
       });
   }, [saveDataToLocalStorage, getStockHistories, getHoldings]);
