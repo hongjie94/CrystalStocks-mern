@@ -72,7 +72,7 @@ export default function Context({children}) {
     await axios.get( `${baseURL}/auth/getuser`, { 
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': 'https://crystalstocks.netlify.app'
       },
       withCredentials: true,
       credentials: 'include'
