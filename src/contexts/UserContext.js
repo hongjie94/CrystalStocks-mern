@@ -70,12 +70,7 @@ export default function Context({children}) {
   // Get User Objects
   const getUserObjects =  useCallback(async () =>{
     await axios.get( `${baseURL}/auth/getuser`, { 
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://crystalstocks-backend.herokuapp.com'
-      },
-      withCredentials: true,
-      credentials: 'include'
+      withCredentials: true
     }).then((res) => {
         if (res.data) {
           alert('getUserObjects');
