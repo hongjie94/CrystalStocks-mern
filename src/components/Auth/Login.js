@@ -30,7 +30,7 @@ export const Login = () => {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://crystalstocks.netlify.app'
+        'Access-Control-Allow-Origin': 'https://crystalstocks-backend.herokuapp.com'
       },
       withCredentials: true,
       credentials: 'include',
