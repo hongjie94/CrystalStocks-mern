@@ -71,9 +71,11 @@ export default function Context({children}) {
   const getUserObjects =  useCallback(async () =>{
     await axios.get( `${baseURL}/auth/getuser`, { 
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       },
-      withCredentials: true
+      withCredentials: true,
+      credentials: 'include'
     }).then((res) => {
         if (res.data) {
           alert('getUserObjects');
