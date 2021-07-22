@@ -70,6 +70,9 @@ export default function Context({children}) {
   // Get User Objects
   const getUserObjects =  useCallback(async () =>{
     await axios.get( `${baseURL}/auth/getuser`, { 
+      headers: {
+        'Content-Type': 'application/json'
+      },
       withCredentials: true
     }).then((res) => {
         if (res.data) {
