@@ -36,6 +36,25 @@ export const Navbar = (LoginObject) => {
     });
   };
 
+  const DemoUser = async (e) => {
+    e.preventDefault();
+    await axios({
+      method: "POST",
+      withCredentials: true,
+      credentials: 'include',
+      url: "https://crystalstocks-backend.herokuapp.com/auth/login",
+      data: {
+        username: 'DEMO',
+        password: 123456,
+      }
+    }).then((res) => {
+      if(res.data === 'Successfully Authenticated') {
+        toast.success("Hello. You are now successfully logged in. Welcome back!");
+        window.location.href = '/history';
+      }
+    });
+  };
+
   // Get Profile Url
   const getProfileUrl = () => {
     setprofileImg(ProfileUrl.current.value);
@@ -142,6 +161,7 @@ export const Navbar = (LoginObject) => {
         {/* Login/Register Links */}
         {!Auth &&
           <div className="not_login">
+            <button className="waves-effect waves-light btn" onClick={()=> DemoUser}>Demo User</button>
             <li><NavLink to="/login" className="waves-effect waves-light btn">Login</NavLink></li>
             <li><NavLink to="/register" className="waves-effect waves-light btn">Register</NavLink></li>
           </div>

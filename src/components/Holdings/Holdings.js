@@ -6,7 +6,7 @@ import HoldingModelContent from '../ReuseableComponents/HoldingModel';
 import { LoginContext } from '../../contexts/UserContext';
 
 export const Holdings = () => {
-
+  
   const LoginObject = useContext(LoginContext);
 
   const UserHoldings = LoginObject.UserHoldings;

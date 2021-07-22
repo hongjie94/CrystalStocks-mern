@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import { useState } from 'react';
 import loginImg from '../../images/login.svg';
 import loginHeader from '../../images/login_header.svg';
@@ -20,7 +20,7 @@ export const Login = () => {
   // Local login
   const localLogin = async (e) => {
     e.preventDefault();
-    await Axios({
+    await axios({
       method: "POST",
       withCredentials: true,
       credentials: 'include',
@@ -82,7 +82,6 @@ export const Login = () => {
               <input 
                 id="user_name" 
                 type="text" 
-                value='DEMO'
                 className="validate" 
                 onChange={(e) => setLoginUsername(e.target.value)}
                 required 
@@ -94,8 +93,7 @@ export const Login = () => {
             {/* Login Password */}
             <div className="row">
               <div className="input-field col s12">
-                <input 
-                value='123456'
+                <input
                 id="password" 
                 type="password" 
                 autoComplete="password"
