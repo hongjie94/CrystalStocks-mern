@@ -123,7 +123,7 @@ export const Navbar = (LoginObject) => {
               <div className="user_detail">
                 <p className="detail_email truncate">{UserObject.email}</p>
                 <p className="detail_username truncate">{UserObject.username}</p>
-                <p className="detail_cash">${UserObject.cash}</p>
+                <p className="detail_cash">${parseFloat(UserObject.cash).toFixed(2)}</p>
               </div>
             </li> 
             

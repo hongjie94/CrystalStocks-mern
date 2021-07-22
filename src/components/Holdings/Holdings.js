@@ -137,7 +137,7 @@ export const Holdings = () => {
                     <th className="hide-on-small-only">&nbsp;</th>
                     <th className="hide-on-small-only">&nbsp;</th>
                     <th className="hide-on-small-only">&nbsp;</th>
-                    <th>${LoginObject.UserObject.cash}</th>
+                    <th>${parseFloat(LoginObject.UserObject.cash).toFixed(2)}</th>
                   </tr>
                 </thead>
               </table>
