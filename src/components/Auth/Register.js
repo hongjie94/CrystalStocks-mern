@@ -33,7 +33,7 @@ export const Register = () => {
 
   // Successfully registered 
   const notifySuccess = async (userObject) => {
-    await LoginObject.UpdateUserObject(userObject);
+    await LoginObject.getUserObjects();
     await toast.success('Registered successfully.');
     history.push('/history');
   };
