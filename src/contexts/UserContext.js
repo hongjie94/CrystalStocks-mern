@@ -70,7 +70,8 @@ export default function Context({children}) {
   // Get User Objects
   const getUserObjects =  useCallback(async () =>{
     await axios.get( `${baseURL}/auth/getuser`, { 
-      withCredentials: true
+      withCredentials: true,
+      credentials: 'include'
     }).then((res) => {
         if (res.data) {
           console.log('Get User Objects Successfully');
@@ -79,8 +80,6 @@ export default function Context({children}) {
           saveDataToLocalStorage(res.data.watchlist);
           getStockHistories(res.data.id);
           getHoldings(res.data.id);
-        } else {
-          console.log(res)
         }
       }).catch((err)=> {
         console.error(err);
