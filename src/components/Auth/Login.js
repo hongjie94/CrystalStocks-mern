@@ -26,6 +26,7 @@ export const Login = () => {
     await Axios({
       method: "POST",
       withCredentials: true,
+      credentials: 'include',
       url: "https://crystalstocks-backend.herokuapp.com/auth/login",
       // url: "http://localhost:4000/auth/login",
       data: {

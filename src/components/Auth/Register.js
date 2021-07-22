@@ -32,7 +32,7 @@ export const Register = () => {
   const modelHeader = "Custom Profile Photo";
 
   // Successfully registered 
-  const notifySuccess = async (userObject) => {
+  const notifySuccess = async () => {
     await LoginObject.getUserObjects();
     await toast.success('Registered successfully.');
     history.push('/history');
