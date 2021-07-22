@@ -52,7 +52,7 @@ export const Navbar = (LoginObject) => {
 
   // Logout
   const  logout = async () => {
-   await axios.get("http://localhost:4000/auth/logout", { 
+   await axios.get("https://crystalstocks-backend.herokuapp.com/auth/logout", { 
       withCredentials: true 
     }).then((res) => {
       if(res.data === "done") {
