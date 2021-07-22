@@ -37,10 +37,11 @@ export const Login = () => {
         toast.error("The username you entered does not exist!");
       }
       if(res.data === 'Successfully Authenticated') {
-        LoginObject.getUserObjects();
-        toast.success("Hello. You are now successfully logged in. Welcome back!");
-        if(LoginObject.UserObject) {
+        if(LoginObject.getUserObjects()) {
+          toast.success("Hello. You are now successfully logged in. Welcome back!");
           window.location.href = '/history';
+        } else {
+          toast.error("Nope !");
         }
       }
     });
