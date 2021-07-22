@@ -73,18 +73,17 @@ export default function Context({children}) {
       withCredentials: true,
       credentials: 'include'
     }).then((res) => {
-      if (res.data === 'get user data fail!') {
-        alert('Safari is not sharing the cookies due to Prevent cross-site tracking setting being enabled. Disable prevent cross site tracking in safari to login or switch browser to Chrome/Firefox.');
-      }
-      if (res.data) {
-        setUserObject(res.data);
-        setAuth(true);
-        saveDataToLocalStorage(res.data.watchlist);
-        getStockHistories(res.data.id);
-        getHoldings(res.data.id);
-      }
+        console.log('getUserObjects', res.data);
+        if (res.data) {
+          setUserObject(res.data);
+          setAuth(true);
+          saveDataToLocalStorage(res.data.watchlist);
+          getStockHistories(res.data.id);
+          getHoldings(res.data.id);
+        }
       }).catch((err)=> {
         // can be slove by set cname record + subdomain on backend
+        alert('Safari is not sharing the cookies due to Prevent cross-site tracking setting being enabled. Disable prevent cross site tracking in safari to login or switch browser to Chrome/Firefox.');
         console.error(err);
       });
   }, [saveDataToLocalStorage, getStockHistories, getHoldings]);
