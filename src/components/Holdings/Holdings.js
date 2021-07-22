@@ -92,8 +92,7 @@ export const Holdings = () => {
                         </>
                         :
                         LoginObject.saveDataToLocalStorage([holding.symbol]) 
-                      }
-                        
+                      } 
                       </tr>
                     ))
                     :

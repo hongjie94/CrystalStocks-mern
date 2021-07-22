@@ -57,7 +57,7 @@ export const Navbar = (LoginObject) => {
     }).then((res) => {
       if(res.data === "done") {
         LoginObject.UserObject.setAuth(false);
-        LoginObject.UserObject.setUserHoldings('');
+        LoginObject.UserObject.setUserHoldings([]);
         LoginObject.UserObject.setStockHistories('');
         history.push("/");
       }
