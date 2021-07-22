@@ -60,6 +60,7 @@ export default function Context({children}) {
           if(res.data[0]) {
             setUserHoldings((res.data[0].stocks).reverse());
           }
+          else(setUserHoldings(''));
         }
       }).catch((err)=> {
         console.error(err);
