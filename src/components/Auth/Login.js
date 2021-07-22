@@ -42,7 +42,7 @@ export const Login = () => {
       if(res.data === 'Successfully Authenticated') {
         LoginObject.getUserObjects();
         toast.success("Hello. You are now successfully logged in. Welcome back!");
-        history.push('/history');
+        // history.push('/history');
       }
     });
   };
