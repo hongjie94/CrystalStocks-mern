@@ -161,7 +161,7 @@ export const Navbar = (LoginObject) => {
         {/* Login/Register Links */}
         {!Auth &&
           <div className="not_login">
-            <button className="waves-effect waves-light btn" onClick={()=> DemoUser}>Demo User</button>
+            <button className="waves-effect waves-light btn" onClick={()=> DemoUser()}>Demo User</button>
             <li><NavLink to="/login" className="waves-effect waves-light btn">Login</NavLink></li>
             <li><NavLink to="/register" className="waves-effect waves-light btn">Register</NavLink></li>
           </div>
