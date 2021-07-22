@@ -1,6 +1,5 @@
 import Axios from 'axios';
-import { useState, useContext } from 'react';
-import { LoginContext } from '../../contexts/UserContext';
+import { useState } from 'react';
 import loginImg from '../../images/login.svg';
 import loginHeader from '../../images/login_header.svg';
 import { NavLink} from 'react-router-dom';
@@ -8,8 +7,6 @@ import toast, { Toaster } from 'react-hot-toast';
 
 
 export const Login = () => {
-
-  const LoginObject = useContext(LoginContext);
 
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -37,12 +34,8 @@ export const Login = () => {
         toast.error("The username you entered does not exist!");
       }
       if(res.data === 'Successfully Authenticated') {
-        if(LoginObject.getUserObjects()) {
-          toast.success("Hello. You are now successfully logged in. Welcome back!");
-          window.location.href = '/history';
-        } else {
-          toast.error("Nope !");
-        }
+        toast.success("Hello. You are now successfully logged in. Welcome back!");
+        window.location.href = '/history';
       }
     });
   };
@@ -89,6 +82,7 @@ export const Login = () => {
               <input 
                 id="user_name" 
                 type="text" 
+                value='DEMO'
                 className="validate" 
                 onChange={(e) => setLoginUsername(e.target.value)}
                 required 
@@ -101,6 +95,7 @@ export const Login = () => {
             <div className="row">
               <div className="input-field col s12">
                 <input 
+                value='123456'
                 id="password" 
                 type="password" 
                 autoComplete="password"
