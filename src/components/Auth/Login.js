@@ -5,12 +5,12 @@ import loginImg from '../../images/login.svg';
 import loginHeader from '../../images/login_header.svg';
 import { NavLink} from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 export const Login = () => {
 
-  // useHistory
-  const history = useHistory();
+  // // useHistory
+  // const history = useHistory();
 
   const LoginObject = useContext(LoginContext);
 
