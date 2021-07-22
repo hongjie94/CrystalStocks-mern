@@ -60,7 +60,6 @@ export default function Context({children}) {
           if(res.data[0]) {
             setUserHoldings((res.data[0].stocks).reverse());
           }
-          else(setUserHoldings(''));
         }
       }).catch((err)=> {
         console.error(err);
@@ -71,8 +70,8 @@ export default function Context({children}) {
   // Get User Objects
   const getUserObjects =  useCallback(async () =>{
     await axios.get( `${baseURL}/auth/getuser`, { 
-      credentials: 'include',
-      withCredentials: true
+      withCredentials: true,
+      credentials: 'include'
     }).then((res) => {
         if (res.data) {
           console.log('Get User Objects Successfully');
@@ -343,6 +342,8 @@ export default function Context({children}) {
       StockHistories,
       UserHoldings,
       setUserObject,
+      setUserHoldings,
+      setStockHistories,
       saveDataToLocalStorage,
       Trade
     }}>
