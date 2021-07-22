@@ -28,7 +28,6 @@ export const Login = () => {
       withCredentials: true,
       credentials: 'include',
       url: "https://crystalstocks-backend.herokuapp.com/auth/login",
-      // url: "http://localhost:4000/auth/login",
       data: {
         username: loginUsername.toUpperCase(),
         password: loginPassword,
@@ -40,7 +39,9 @@ export const Login = () => {
       if(res.data === 'Successfully Authenticated') {
         LoginObject.getUserObjects();
         toast.success("Hello. You are now successfully logged in. Welcome back!");
-        window.location.href = '/history';
+        if(LoginObject.UserObject) {
+          window.location.href = '/history';
+        }
       }
     });
   };

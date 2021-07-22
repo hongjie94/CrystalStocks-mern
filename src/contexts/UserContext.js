@@ -74,7 +74,6 @@ export default function Context({children}) {
       credentials: 'include'
     }).then((res) => {
         if (res.data) {
-          console.log('Get User Objects Successfully');
           setUserObject(res.data);
           setAuth(true);
           saveDataToLocalStorage(res.data.watchlist);
@@ -82,6 +81,8 @@ export default function Context({children}) {
           getHoldings(res.data.id);
         }
       }).catch((err)=> {
+        // can be slove by set cname record + subdomain on backend
+        alert('Safari is not sharing the cookies due to Prevent cross-site tracking setting being enabled. Disable prevent cross site tracking in safari to login or switch to Chrome/Firefox.');
         console.error(err);
       });
   }, [saveDataToLocalStorage, getStockHistories, getHoldings]);
