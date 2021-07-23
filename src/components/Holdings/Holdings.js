@@ -26,10 +26,6 @@ export const Holdings = () => {
     openModal();
   }
 
-  if(!LoginObject.Auth) {
-    window.location.href = '/404';
-  }
-
   // Retrieved local storage objects
   const retrievedObject = useCallback((symbol) => {
     let curObject = localStorage.getItem(symbol);
