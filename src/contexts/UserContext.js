@@ -1,12 +1,14 @@
 import { createContext, useEffect, useState, useCallback} from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { useHistory } from "react-router-dom";
 
 export const LoginContext = createContext({});
 export const TransactionContext = createContext({});
 
 export default function Context({children}) {
         
+  const history = useHistory();
   const [UserObject, setUserObject] = useState('');
   const [StockHistories, setStockHistories] = useState('');
   const [UserHoldings, setUserHoldings] = useState('');
@@ -83,11 +85,11 @@ export default function Context({children}) {
         }
       }).catch((err)=> {
         // can be slove by set cname record + subdomain on backend
-        window.location.href = '/404';
         alert('Safari is not sharing the cookies due to Prevent cross-site tracking setting being enabled. Disable prevent cross site tracking in safari to login or switch browser to Chrome/Firefox.');
         console.error(err);
+        history.push('/NotFound-404');
       });
-  }, [saveDataToLocalStorage, getStockHistories, getHoldings]);
+  }, [saveDataToLocalStorage, getStockHistories, getHoldings, history]);
 
   // Update Watchlist
   const UpdateWatchlist = async (symbol, method) => {
