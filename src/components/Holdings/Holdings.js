@@ -6,7 +6,7 @@ import HoldingModelContent from '../ReuseableComponents/HoldingModel';
 import { LoginContext } from '../../contexts/UserContext';
 
 export const Holdings = () => {
-  
+ 
   const LoginObject = useContext(LoginContext);
 
   const UserHoldings = LoginObject.UserHoldings;
@@ -24,6 +24,10 @@ export const Holdings = () => {
   const trade = (name, shares) => {
     setCurrentSymbolDatas({SymbolName:name, SymbolShares:shares});
     openModal();
+  }
+
+  if(!LoginObject.Auth) {
+    window.location.href = '/404';
   }
 
   // Retrieved local storage objects
