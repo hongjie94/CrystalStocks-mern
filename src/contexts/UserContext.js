@@ -1,20 +1,18 @@
 import { createContext, useEffect, useState, useCallback} from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { useHistory } from "react-router-dom";
 
 export const LoginContext = createContext({});
 export const TransactionContext = createContext({});
 
 export default function Context({children}) {
-        
-  const history = useHistory();
+
   const [UserObject, setUserObject] = useState('');
   const [StockHistories, setStockHistories] = useState('');
   const [UserHoldings, setUserHoldings] = useState('');
   const [Auth, setAuth] = useState(false);
-  const baseURL = 'https://crystalstocks-backend.herokuapp.com';
-  // const baseURL = 'http://localhost:4000';
+  // const baseURL = 'https://crystalstocks-backend.herokuapp.com';
+  const baseURL = 'http://localhost:4000';
 
 
   // Save symbol datas to Local Storage
@@ -75,7 +73,6 @@ export default function Context({children}) {
       withCredentials: true,
       credentials: 'include'
     }).then((res) => {
-        console.log('getUserObjects', res.data);
         if (res.data) {
           setUserObject(res.data);
           setAuth(true);
@@ -87,9 +84,8 @@ export default function Context({children}) {
         // can be slove by set cname record + subdomain on backend
         alert('Safari is not sharing the cookies due to Prevent cross-site tracking setting being enabled. Disable prevent cross site tracking in safari to login or switch browser to Chrome/Firefox.');
         console.error(err);
-        history.push('/NotFound-404');
       });
-  }, [saveDataToLocalStorage, getStockHistories, getHoldings, history]);
+  }, [saveDataToLocalStorage, getStockHistories, getHoldings]);
 
   // Update Watchlist
   const UpdateWatchlist = async (symbol, method) => {

@@ -4,6 +4,8 @@ import {ModalProvider, Modal, useModal, ModalTransition,} from 'react-simple-hoo
 import 'react-simple-hook-modal/dist/styles.css';
 import HoldingModelContent from '../ReuseableComponents/HoldingModel';
 import { LoginContext } from '../../contexts/UserContext';
+import { motion } from 'framer-motion';
+import AnimationVariants from '../AnimationVariants';
 
 export const Holdings = () => {
  
@@ -52,134 +54,140 @@ export const Holdings = () => {
     TotalCash();
   },[retrievedObject, TotalCash]);
 
-    return (
-      <ModalProvider>
-        <div className="Holdings">
-          <div className="container">
-            <div className="Holdings__header">
-              <img src={holdingsImg} className="svg responsive-img" alt="holdingsImg"/>
-              <h4>Holdings</h4>
-            </div>
+  // Animation Variants 
+  const { EnterPageVariant } = AnimationVariants();
 
-            {/* Holdings table)*/}    
-            <table className="highlight responsive-table">
+  return (
+    <ModalProvider>
+      <div className="Holdings">
+        <motion.div 
+          variants={EnterPageVariant}
+          initial='Enter'
+          animate='End'
+          className="container">
+          <div className="Holdings__header">
+            <img src={holdingsImg} className="svg responsive-img" alt="holdingsImg"/>
+            <h4>Holdings</h4>
+          </div>
+
+          {/* Holdings table)*/}    
+          <table className="highlight responsive-table">
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+              <tbody>
+                { UserHoldings ?
+                  (UserHoldings).map((holding, index)=>(
+                    <tr 
+                      onClick={()=> trade(
+                        holding.symbol, 
+                        holding.shares
+                      )} 
+                      key={index}
+                      >
+                      <td>{holding.symbol} </td>
+                      <td className="truncate companyName">{holding.company} </td>
+                      <td>{holding.shares} </td>
+                      {retrievedObject(holding.symbol) ? 
+                      <>
+                        <td> ${parseFloat(retrievedObject(holding.symbol).latestPrice).toFixed(2)}</td>
+                        <td>${parseFloat(holding.shares * retrievedObject(holding.symbol).latestPrice).toFixed(2)}</td>
+                      </>
+                      :
+                      LoginObject.saveDataToLocalStorage([holding.symbol]) 
+                    } 
+                    </tr>
+                  ))
+                  :
+                  <tr>
+                    <td>Loading ...</td>
+                  </tr>
+                }
+                { UserHoldings && 
+                  UserHoldings.length === 0 ?
+                  <tr>
+                    <td>Your have 0 Holdings...</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                  </tr>
+                    :
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+            
+            {/* User Cash)*/}      
+            <table className="highlight">
               <thead>
                 <tr>
-                  <th>Symbol</th>
-                  <th>Name</th>
-                  <th>Shares</th>
-                  <th>Price</th>
-                  <th>Total</th>
+                  <th>Cash</th>
+                  <th>&nbsp;</th>
+                  <th>&nbsp;</th>
+                  <th className="show-on-small">&nbsp;</th>
+                  <th className="hide-on-med-and-down">&nbsp;</th>
+                  <th className="hide-on-med-and-down">&nbsp;</th>
+                  <th className="hide-on-small-only">&nbsp;</th>
+                  <th className="hide-on-small-only">&nbsp;</th>
+                  <th className="hide-on-small-only">&nbsp;</th>
+                  <th className="hide-on-small-only">&nbsp;</th>
+                  <th className="hide-on-small-only">&nbsp;</th>
+                  <th>${parseFloat(LoginObject.UserObject.cash).toFixed(2)}</th>
                 </tr>
               </thead>
-                <tbody>
-                  { UserHoldings ?
-                    (UserHoldings).map((holding, index)=>(
-                      <tr 
-                        onClick={()=> trade(
-                          holding.symbol, 
-                          holding.shares
-                        )} 
-                        key={index}
-                        >
-                        <td>{holding.symbol} </td>
-                        <td className="truncate companyName">{holding.company} </td>
-                        <td>{holding.shares} </td>
-                        {retrievedObject(holding.symbol) ? 
-                        <>
-                          <td> ${parseFloat(retrievedObject(holding.symbol).latestPrice).toFixed(2)}</td>
-                          <td>${parseFloat(holding.shares * retrievedObject(holding.symbol).latestPrice).toFixed(2)}</td>
-                        </>
-                        :
-                        LoginObject.saveDataToLocalStorage([holding.symbol]) 
-                      } 
-                      </tr>
-                    ))
-                    :
-                    <tr>
-                      <td>Loading ...</td>
-                    </tr>
-                  }
-                  { UserHoldings && 
-                    UserHoldings.length === 0 ?
-                    <tr>
-                      <td>Your have 0 Holdings...</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                     :
-                    <tr>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                  }
-                </tbody>
-              </table>
-              
-              {/* User Cash)*/}      
-              <table className="highlight">
-                <thead>
-                  <tr>
-                    <th>Cash</th>
-                    <th>&nbsp;</th>
-                    <th>&nbsp;</th>
-                    <th className="show-on-small">&nbsp;</th>
-                    <th className="hide-on-med-and-down">&nbsp;</th>
-                    <th className="hide-on-med-and-down">&nbsp;</th>
-                    <th className="hide-on-small-only">&nbsp;</th>
-                    <th className="hide-on-small-only">&nbsp;</th>
-                    <th className="hide-on-small-only">&nbsp;</th>
-                    <th className="hide-on-small-only">&nbsp;</th>
-                    <th className="hide-on-small-only">&nbsp;</th>
-                    <th>${parseFloat(LoginObject.UserObject.cash).toFixed(2)}</th>
-                  </tr>
-                </thead>
-              </table>
+            </table>
 
-              {/* Total add up for all shares in cash)*/}  
-              <table>
-                <thead >
-                  <tr>
-                    {/* Total add ups */}
-                    <th className="notShow">Cash</th>
-                    <th>&nbsp;</th>
-                    <th>&nbsp;</th>
-                    <th className="show-on-small">&nbsp;</th>
-                    <th className="hide-on-med-and-down">&nbsp;</th>
-                    <th className="hide-on-med-and-down">&nbsp;</th>
-                    <th className="hide-on-small-only">&nbsp;</th>
-                    <th className="hide-on-small-only">&nbsp;</th>
-                    <th className="hide-on-small-only">&nbsp;</th>
-                    <th className="hide-on-small-only">&nbsp;</th>
-                    <th className="hide-on-small-only">&nbsp;</th>
-                    <th>${parseFloat(TotalOwned).toFixed(2)}</th>
-                  </tr>
-                </thead>
-              </table>
+            {/* Total add up for all shares in cash)*/}  
+            <table>
+              <thead >
+                <tr>
+                  {/* Total add ups */}
+                  <th className="notShow">Cash</th>
+                  <th>&nbsp;</th>
+                  <th>&nbsp;</th>
+                  <th className="show-on-small">&nbsp;</th>
+                  <th className="hide-on-med-and-down">&nbsp;</th>
+                  <th className="hide-on-med-and-down">&nbsp;</th>
+                  <th className="hide-on-small-only">&nbsp;</th>
+                  <th className="hide-on-small-only">&nbsp;</th>
+                  <th className="hide-on-small-only">&nbsp;</th>
+                  <th className="hide-on-small-only">&nbsp;</th>
+                  <th className="hide-on-small-only">&nbsp;</th>
+                  <th>${parseFloat(TotalOwned).toFixed(2)}</th>
+                </tr>
+              </thead>
+            </table>
 
-            {/* Trade Model */}
-            <Modal
-              isOpen={isModalOpen}
-              transition={ModalTransition.SCALE}
-            >
-            <HoldingModelContent
-              SymbolName={CurrentSymbolDatas.SymbolName}
-              SymbolShares={CurrentSymbolDatas.SymbolShares}
-              disable={disable}
-              setDisable={setDisable}
-              setShares={setShares}
-              Shares={Shares}
-              closeModal={closeModal}
-            />
-            </Modal>
-          </div>
-        </div>
-      </ModalProvider>
-    )
-   
+          {/* Trade Model */}
+          <Modal
+            isOpen={isModalOpen}
+            transition={ModalTransition.SCALE}
+          >
+          <HoldingModelContent
+            SymbolName={CurrentSymbolDatas.SymbolName}
+            SymbolShares={CurrentSymbolDatas.SymbolShares}
+            disable={disable}
+            setDisable={setDisable}
+            setShares={setShares}
+            Shares={Shares}
+            closeModal={closeModal}
+          />
+          </Modal>
+        </motion.div>
+      </div>
+    </ModalProvider>
+  )
 };

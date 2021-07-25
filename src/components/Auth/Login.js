@@ -4,7 +4,8 @@ import loginImg from '../../images/login.svg';
 import loginHeader from '../../images/login_header.svg';
 import { NavLink} from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
-
+import { motion } from 'framer-motion';
+import AnimationVariants from '../AnimationVariants';
 
 export const Login = () => {
 
@@ -40,13 +41,22 @@ export const Login = () => {
     });
   };
 
+  // Animation Variants 
+  const { AuthBoxVariant, BoxVariant } = AnimationVariants();
+
   return (
-    <div className="Login">
+    <motion.div 
+      variants={AuthBoxVariant}
+      initial='Enter'
+      animate='End'
+      className="Login">
       <div className="container">
         <div className="row">
           <Toaster />
-          {/* Right Box Content */}  
-          <div className="col s12 l6 hide-on-med-and-down Login_rightBox" > 
+          {/* Left Box Content */}  
+          <div
+
+            className="col s12 l6 hide-on-med-and-down Login_leftBox" > 
 
             {/* Header */}  
             <div className="title center card teal lighten-1"> 
@@ -67,8 +77,12 @@ export const Login = () => {
             />
           </div>
 
-          {/* Left Box Content */}  
-          <div className="col s12 l6 card Login_leftBox">    
+          {/* Right Box Content */}  
+          <motion.div
+            variants={BoxVariant}
+            initial='Enter'
+            animate='End'
+            className="col s12 l6 card Login_rightBox">    
           {/* Login  Header */}
             <div className="title loginHeader center"> 
               <img className="responsive-img" src={loginHeader} alt=""/>
@@ -124,9 +138,9 @@ export const Login = () => {
                 here
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 };

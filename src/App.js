@@ -10,6 +10,7 @@ import { Register } from './components/Auth/Register';
 import { Footer } from './components/Footer/Footer';
 import { LoginContext } from './contexts/UserContext';
 import {NotFound} from './components/NotFound';
+
 function App() {
   
   const LoginObject = useContext(LoginContext);

@@ -6,7 +6,8 @@ import M from 'materialize-css';
 import { StaticDialog } from 'react-st-modal';
 import TradeModel from '../ReuseableComponents/TradeModel';
 import TradeModelFunctions from '../ReuseableComponents/TradeModelFunctions';
-
+import { motion,  AnimatePresence } from 'framer-motion';
+import AnimationVariants from '../AnimationVariants';
 
 export const Favorites = () => {
 
@@ -57,9 +58,16 @@ export const Favorites = () => {
     TradeStock
   } = TradeModelFunctions();
 
+   // Animation Variants 
+   const {EnterPageVariant, StarIconVariant, RemoveListsVariant} = AnimationVariants();
+
   return (
     <div className="Favorites">
-      <div className="container">
+      <motion.div 
+         variants={EnterPageVariant}
+         initial='Enter'
+         animate='End'
+        className="container">
         <ul className="collection with-header">
 
           {/* Favorites Header */}
@@ -69,10 +77,13 @@ export const Favorites = () => {
           </li>
 
           {/* Favorites contents */}
+          <AnimatePresence>
           { LoginObject.UserObject && 
             LoginObject.UserObject.watchlist.map((symbol, index)=>(
               
-            <li 
+            <motion.li
+              variants={RemoveListsVariant}
+              exit='Remove'
               className="collection-item avatar" 
               key={index} 
               >
@@ -172,7 +183,7 @@ export const Favorites = () => {
                   </div>   
                 </div>
               }
-      
+              
               {/* Mobil trade buttons */}
               <div className="mobilTradeBtn">
                 {/* BUY */}
@@ -202,15 +213,18 @@ export const Favorites = () => {
 
               {/* Wtachlist button */}
               <a href="#!" className="secondary-content">
-                <i 
+                <motion.i 
+                  variants={StarIconVariant}
+                  whileHover='OnHover'
                   className="material-icons accent-4 amber-text" 
                   onClick={()=> removeWatchlist(symbol)}
                   >star
-                </i>
+                </motion.i>
               </a>
-            </li>
+            </motion.li>
             ))
           }
+          </AnimatePresence>
           { 
             LoginObject.UserObject.watchlist &&
             LoginObject.UserObject.watchlist.length === 0 &&
@@ -219,7 +233,7 @@ export const Favorites = () => {
             </li>
           }
         </ul>
-      </div>
+      </motion.div>
     </div>
   )
 }

@@ -6,7 +6,8 @@ import Loader from '../../ReuseableComponents/Loader';
 import { LoginContext } from '../../../contexts/UserContext';
 import UpdateWatchlist from '../../ReuseableComponents/UpdateWatchlist';
 import M from 'materialize-css';
-
+import { motion } from 'framer-motion';
+import AnimationVariants from '../../AnimationVariants';
 const Markets = () => {
 
 
@@ -71,14 +72,25 @@ const Markets = () => {
     }
   };
 
+  // Animation Variants 
+  const {MarketsHeaderVariant, MarketRowVariant, StarIconVariant} = AnimationVariants();
+ 
   return (
     <div className="Markets">
       {/* Market Header */}
-      <div className="Browse__header card center">
+      <motion.div
+        variants={MarketsHeaderVariant}
+        initial='Enter'
+        animate='End'
+        className="Browse__header card center">
         <span className="flowing-text">Markets</span>
         <img src={MarketsHeaderImg} className="responsive-img" alt="img not found"/>
-      </div>
-      <div className="row">
+      </motion.div>
+      <motion.div
+        variants={MarketRowVariant}
+        initial='Enter'
+        animate='End'
+        className="row">
         <div className="col s12">
           <ul className="TableHeader">
           <li>
@@ -156,12 +168,25 @@ const Markets = () => {
                       {/* Star icon  */}
                       <td>
                       {Auth && (LoginObject.UserObject.watchlist).includes(quote.symbol) ?
-                        <a href="#!">
-                          <i className="material-icons td_icon accent-4 amber-text" onClick={()=> {removeWatchlist(quote.symbol)}}>star</i>
+                        <a 
+                        href="#!">
+                          <motion.i 
+                            variants={StarIconVariant}
+                            whileHover='OnHover'
+                            whileTap={{ rotate: -180 }}
+                            className="material-icons td_icon accent-4 amber-text" 
+                            onClick={()=> {removeWatchlist(quote.symbol)}}>star
+                          </motion.i>
                         </a>
                         :
                         <a href="#!">
-                          <i className="material-icons td_icon black-text" onClick={()=> {addWatchlist(quote.symbol)}}>star_border</i>
+                          <motion.i 
+                            variants={StarIconVariant}
+                            whileHover='OnHover'
+                            whileTap={{ rotate: 180 }}
+                            className="material-icons td_icon black-text" 
+                            onClick={()=> {addWatchlist(quote.symbol)}}>star_border
+                          </motion.i>
                         </a>
                       }
                       </td>
@@ -188,7 +213,7 @@ const Markets = () => {
             </li>
           </ul>
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }

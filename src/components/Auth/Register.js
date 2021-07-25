@@ -8,6 +8,8 @@ import registerHeader from '../../images/register_header.svg';
 import unkownUser from '../../images/unkownUser.png';
 import Model from '../ReuseableComponents/ProfileUrlModel';
 import { NavLink} from 'react-router-dom';
+import { motion } from 'framer-motion';
+import AnimationVariants from '../AnimationVariants';
 
 export const Register = () => {
 
@@ -77,7 +79,6 @@ export const Register = () => {
         },
         withCredentials: true,
         url: "https://crystalstocks-backend.herokuapp.com/auth/register"
-        // url: "http://localhost:4000/auth/register"
       }).then((res, error) => {
         if(error) {
           console.log(error);
@@ -87,9 +88,15 @@ export const Register = () => {
     }
   };
 
-
+  // Animation Variants 
+  const { AuthBoxVariant, BoxVariant } = AnimationVariants();
+  
   return (
-    <div className="Register">
+    <motion.div 
+      variants={AuthBoxVariant}
+      initial='Enter'
+      animate='End'
+      className="Register">
         <div className="container">
           <div className="row center box_row">
 
@@ -115,9 +122,12 @@ export const Register = () => {
             />
           </div>
 
-           
-          {/* Left Box Content */}  
-          <div className="col s12 m12 l6 card Register_rightBox" >
+          {/* Right Box Content */}  
+          <motion.div 
+            variants={BoxVariant}
+            initial='Enter'
+            animate='End'
+            className="col s12 m12 l6 card Register_rightBox" >
 
             {/* Notifications */}
             <Toaster />
@@ -219,9 +229,9 @@ export const Register = () => {
               here
             </p>
           </form>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
