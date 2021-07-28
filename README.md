@@ -1,3 +1,16 @@
+# Technologies Used
+* React
+* CSS3
+* HTML5
+* MaterializeCSS
+* Sass
+* Framer Motion(Animation)
+* Netlify(Hosting)
+
+## App-Diagram 
+### [https://crystalstocks.netlify.app](https://crystalstocks.netlify.app)
+![Screenshot](./Diagram.jpg)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
