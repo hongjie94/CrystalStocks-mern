@@ -51,7 +51,7 @@ export const Navbar = (LoginObject) => {
     }).then((res) => {
       if(res.data === 'Successfully Authenticated') {
         window.location.href = '/history';
-        toast.success("Hello. You are now successfully logged in. Welcome back!");
+        toast.success("Hello. You are now successfully logged in. Welcome back!", {duration: 5000});
       }
     });
   };
