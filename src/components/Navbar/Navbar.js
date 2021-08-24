@@ -38,6 +38,7 @@ export const Navbar = (LoginObject) => {
 
   const DemoUser = async (e) => {
     e.preventDefault();
+    toast.loading('Signing in as Demo User...');
     await axios({
       method: "POST",
       withCredentials: true,
